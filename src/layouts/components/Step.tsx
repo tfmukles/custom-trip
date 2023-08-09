@@ -1,19 +1,21 @@
 "use client";
 
 const Step = ({ isActive }: { isActive?: boolean }) => {
-  const color = isActive ? "#0e2c23" : "#b6d2c4";
+  const textColor = isActive ? "text-[#0e2c23]" : "text-[#b6d2c4]";
+  const bgcolor = isActive ? "bg-[#0e2c23]" : "bg-[#b6d2c4]";
+  const borderColor = isActive ? "border-[#0e2c23]" : "border-[#b6d2c4]";
 
   return (
-    <div className={`text-[${color}] flex space-x-8 text-sm items-center`}>
+    <div className={`${textColor} flex space-x-8 text-sm items-center`}>
       <div
         className={
           isActive
-            ? "border-2 border-[${color}] inline-block rounded-full p-[3px]"
+            ? `border-2 ${borderColor} inline-block rounded-full p-[3px]`
             : ""
         }
       >
         <div
-          className={`w-[22px] h-[22px] p-2 bg-[${color}] rounded-full text-white inline-flex items-center justify-center font-bold`}
+          className={`w-[22px] h-[22px] p-2 ${bgcolor} rounded-full text-white inline-flex items-center justify-center font-bold`}
         >
           1
         </div>
