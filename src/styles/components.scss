@@ -176,3 +176,42 @@
   @apply prose-tr:border-border prose-tr:dark:border-darkmode-border;
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px] prose-td:dark:text-darkmode-text;
 }
+
+.stepper {
+  &-steps {
+    @apply space-y-20 relative;
+
+    &::before {
+      content: "";
+      @apply absolute top-0 left-[9px] w-1 h-full bg-[#b6d2c4];
+    }
+
+    &::after {
+      content: "";
+      @apply absolute top-0 left-[9px] w-1 bg-[#0e2c23] h-[calc(var(--height))];
+    }
+  }
+  &-step {
+    @apply flex space-x-8 text-sm items-center text-[#b6d2c4] relative z-10;
+
+    &.active {
+      @apply text-[#0e2c23];
+
+      .stepper-serail {
+        @apply bg-[#0e2c23];
+
+        &::after {
+          content: "";
+          @apply border-2 border-[#0e2c23] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%_+_10px)] h-[calc(100%_+_10px)] -z-[1] rounded-full bg-white;
+        }
+      }
+    }
+  }
+
+  &-serail {
+    @apply w-[22px] h-[22px] rounded-full bg-[#b6d2c4] text-white inline-flex items-center justify-center font-bold flex-none relative;
+  }
+  &-label {
+    @apply uppercase text-inherit;
+  }
+}
