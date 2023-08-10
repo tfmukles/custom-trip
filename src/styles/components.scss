@@ -177,18 +177,29 @@
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px] prose-td:dark:text-darkmode-text;
 }
 
+//modal
+
+.overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-[#faf1edcc] rounded;
+}
+
+.modal-body {
+  @apply relative max-w-[100vw] flex flex-grow-0 items-center justify-center;
+}
+
+//stepper
 .stepper {
   &-steps {
     @apply space-y-20 relative;
 
     &::before {
       content: "";
-      @apply absolute top-0 left-[9px] w-1 h-full bg-[#b6d2c4];
+      @apply absolute top-0 left-[21px] w-1 h-full bg-[#b6d2c4];
     }
 
     &::after {
       content: "";
-      @apply absolute top-0 left-[9px] w-1 bg-[#0e2c23] h-[calc(var(--height))];
+      @apply absolute top-0 left-[21px] w-1 bg-[#0e2c23] h-[calc(var(--height))] transition-[height] duration-500;
     }
   }
   &-step {
@@ -198,7 +209,7 @@
       @apply text-[#0e2c23];
 
       .stepper-serail {
-        @apply bg-[#0e2c23];
+        @apply bg-[#0e2c23] transition-all duration-300;
 
         &::after {
           content: "";
@@ -212,6 +223,44 @@
     @apply w-[22px] h-[22px] rounded-full bg-[#b6d2c4] text-white inline-flex items-center justify-center font-bold flex-none relative;
   }
   &-label {
-    @apply uppercase text-inherit;
+    @apply uppercase text-inherit hidden md:block;
   }
+}
+
+//where to form
+
+.travel-form {
+  @apply transition;
+
+  &.active {
+    @apply bg-white shadow relative z-50 p-4 rounded;
+
+    .search-wrapper input {
+      @apply rounded-none border-t-0 border-l-0 border-r-0 border-b-black border-b-2 placeholder:text-gray-600 placeholder:text-xl;
+    }
+  }
+
+  .search-wrapper {
+    @apply relative mb-3;
+    input {
+      @apply w-full pl-10 p-4 rounded-lg m-0 h-full border-2 border-black focus:ring-0  focus:border-black placeholder:text-2xl placeholder:text-black placeholder:font-medium;
+    }
+  }
+}
+
+// sections titles
+.section-title {
+  @apply text-[#040404] font-light font-secondary leading-[61px] lg:text-[49px] mb-4;
+
+  &-sm {
+    @apply mb-7 text-[32px] leading-10 font-medium text-black;
+  }
+}
+
+.section-desc {
+  @apply text-xl text-[#040404]/70 font-light font-primary leading-8 mb-5;
+}
+
+.dates-picker .rdrDefinedRangesWrapper {
+  display: none;
 }

@@ -1,56 +1,41 @@
 "use client";
+import Default from "@/components/Default";
 import Modal from "@/components/Modal";
 import Step from "@/components/Step";
-import { SteppersContext, stepper } from "@/layouts/steppersContext";
+import StepperBanner from "@/components/StepperBanner";
+import { SteppersContext, steps } from "@/layouts/steppersContext";
 import { AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
 
-const Content = () => {
-  const data = stepper();
-  console.log(data);
-  return (
-    <div className="w-full">
-      <h1 className="font-medium mb-3">Let’s start planning your trip</h1>
-      <p className="text-xl mb-4 max-w-lg">
-        Share your travel preferences then select an expert with intimate
-        knowledge of your destination to plan your next getaway.
-      </p>
-      <button className="btn btn-primary mb-6">Get Started</button>
-    </div>
-  );
-};
-
-const steps = {
-  1: {
-    label: "location",
-    Content: <Content />,
-  },
-  2: {
-    label: "dates",
-    Content: <Content />,
-  },
-  3: {
-    label: "travelers",
-    Content: <Content />,
-  },
-  4: {
-    label: "budgets",
-    Content: <Content />,
-  },
-  5: {
-    label: "activities",
-    Content: <Content />,
-  },
-  6: {
-    label: "extra",
-    Content: <Content />,
-  },
-};
+type StepKey = keyof typeof steps;
 
 const Home = () => {
+  const [travelDetails, setTravel] = useState({
+    country: "",
+    date: "",
+    adults: 0,
+    children: {
+      total: 0,
+      ages: [],
+    },
+    range: {
+      from: 0,
+      to: 0,
+    },
+    desired: [],
+    consideration: false,
+    travelVibe: "",
+  });
+
+  console.log({ travelDetails });
+
+  const onTrvelDataChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setTravel((prev) => ({ ...prev, [name]: value }));
+  };
+
   const [isOpen, setOpen] = useState(false);
-  let [step, setStep] = useState<number>(2);
+  let [step, setStep] = useState<number>(0);
   const onOpen = () => setOpen(true);
   const onClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -59,12 +44,15 @@ const Home = () => {
     }
   };
 
+  let DynamicContent = steps[step as StepKey]?.Content ?? Default;
+  const nextStep = () => setStep((step) => step + 1);
+  const prevStep = () => setStep((step) => step - 1);
+
   return (
     <div className="section  bg-[#0e2c23]">
       <div className="container">
         <button
           onClick={onOpen}
-          onFocus={onOpen}
           className="bg-[#f2b203] rounded-full text-base font-medium py-4 px-5 text-black focus:ring-2 ring-white"
         >
           Find A Trip Designer
@@ -74,23 +62,16 @@ const Home = () => {
           <AnimatePresence>
             {isOpen && (
               <Modal onClose={onClose}>
-                <div className="max-w-[1000px] p-6 bg-white mx-auto">
-                  <Image
-                    src={"/images/intro-default.jpg"}
-                    className="mb-6"
-                    width={1000}
-                    height={200}
-                    alt="intro-img"
-                  />
-
-                  <div className="flex space-x-10">
-                    <ul
+                <form className="max-w-[1000px] p-6 bg-white mx-auto">
+                  <StepperBanner onClose={onClose} />
+                  <div className="row gx-4">
+                    <div
                       style={
                         {
-                          "--height": `${101 * step}px`,
+                          "--height": `${65 + (step - 1) * 100}px`,
                         } as React.CSSProperties
                       }
-                      className="stepper-steps"
+                      className="stepper-steps col-1 md:col-3"
                     >
                       {Array.from(Object.entries(steps)).map(
                         ([key, { label }]) => {
@@ -104,12 +85,44 @@ const Home = () => {
                           );
                         },
                       )}
-                    </ul>
-                    <SteppersContext.Provider value={{ steps }}>
-                      {steps["1"].Content}
-                    </SteppersContext.Provider>
+                    </div>
+                    <div className="md:col-9 col">
+                      <SteppersContext.Provider
+                        value={{
+                          steps,
+                          nextStep,
+                          currentStep: step,
+                          travel: travelDetails,
+                          setTravel: onTrvelDataChange,
+                        }}
+                      >
+                        <div className="h-full flex flex-col">
+                          <DynamicContent />
+                          <div className="mt-auto flex justify-between">
+                            {step >= 2 && (
+                              <button
+                                type="button"
+                                onClick={prevStep}
+                                className="btn underline hover:bg-theme-light"
+                              >
+                                Back
+                              </button>
+                            )}
+                            {step < Object.keys(steps).length && (
+                              <button
+                                type="button"
+                                onClick={nextStep}
+                                className="btn btn-primary ml-auto"
+                              >
+                                Next
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </SteppersContext.Provider>
+                    </div>
                   </div>
-                </div>
+                </form>
               </Modal>
             )}
           </AnimatePresence>

@@ -66,7 +66,7 @@ function Step({ step, currentStep }: { step: number; currentStep: number }) {
       <motion.div
         variants={backgroundVariants}
         transition={backgroundTransition}
-        className="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-400 bg-white font-semibold text-slate-500"
+        className="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-400 bg- font-semibold text-slate-500"
       >
         <div className="relative flex items-center justify-center">
           <AnimatePresence>

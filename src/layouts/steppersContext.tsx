@@ -1,39 +1,83 @@
 "use client";
 
 import { createContext, useContext } from "react";
+import Activities from "./components/Activities";
+import Budget from "./components/Budget";
+import Dates from "./components/Dates";
+import Extra from "./components/Extra";
+import Location from "./components/Location";
+import Travel from "./components/Travel";
 
-const steps: { [key: number]: { label: string; Content: null } } = {
+export const steps = {
   1: {
     label: "location",
-    Content: null,
+    Content: Location,
   },
+
   2: {
     label: "dates",
-    Content: null,
+    Content: Dates,
   },
   3: {
     label: "travelers",
-    Content: null,
+    Content: Travel,
   },
   4: {
     label: "budgets",
-    Content: null,
+    Content: Budget,
   },
   5: {
     label: "activities",
-    Content: null,
+    Content: Activities,
   },
   6: {
     label: "extra",
-    Content: null,
+    Content: Extra,
   },
 };
 
 export type GlobalContent = {
-  steps: { [key: number]: { label: string; Content: React.JSX.Element } };
-  setCopy: (c: string) => void;
+  currentStep: number;
+  steps: { [key: number]: { label: string; Content: () => JSX.Element } };
+  nextStep?: any;
+  travel: {
+    country: string;
+    date: string;
+    adults: number;
+    children: {
+      total: number;
+      ages: number[];
+    };
+    range: {
+      from: number;
+      to: number;
+    };
+    desired: string[];
+    consideration: boolean;
+    travelVibe: string;
+  };
+  setTravel?: (data: any) => void;
 };
 
-export const SteppersContext = createContext<GlobalContent | null>(null);
+export const SteppersContext = createContext<GlobalContent>({
+  steps,
+  currentStep: 0,
+  travel: {
+    country: "",
+    date: "",
+    adults: 0,
+    children: {
+      total: 0,
+      ages: [],
+    },
+    range: {
+      from: 0,
+      to: 0,
+    },
+    desired: [],
+    consideration: false,
+    travelVibe: "",
+  },
+});
 
-export const stepper = () => useContext(SteppersContext);
+export const useStepperContext = () => useContext(SteppersContext);
