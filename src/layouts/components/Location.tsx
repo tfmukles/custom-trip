@@ -1,9 +1,6 @@
 import DynamicIcon from "@/helpers/DynamicIcon";
-import { useForm } from "@/hooks/useForm";
-import { DynamicContent } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import StepperNavigation from "./StepperNavigation";
+import { useState } from "react";
 
 const initialState = {
   country: "",
@@ -28,47 +25,15 @@ const getCitites = async () => {
   return data;
 };
 
-const Location = ({
-  currentStep,
-  nextStep,
-  prevStep,
-  data,
-  setData,
-}: DynamicContent) => {
-  const { formData, isError, onUpdate, validateCheck } = useForm<state>({
-    initialState,
-    key: "location",
-  });
-  const [cities, setCities] = useState<{ isLoading: boolean; data: string[] }>({
-    isLoading: true,
-    data: [],
-  });
+type props = {
+  updateFields: (fields: Partial<any>) => void;
+};
 
+const Location = ({ updateFields }: props) => {
   const [isOpen, setOpen] = useState(false);
-  const onClose = () => {
-    setOpen(false);
-  };
-
-  useEffect(() => {
-    getCitites().then((res) => {
-      setCities({ data: res.data, isLoading: false });
-    });
-  }, []);
-
-  const [input, setInput] = useState("");
-
-  useEffect(() => {
-    setInput(formData.country);
-  }, [formData.country]);
-
+  const onClose = () => setOpen(false);
   return (
     <>
-      {isError && (
-        <p className="bg-red-300 p-3 rounded mb-5 text-dark">
-          Please complete this field so we can find the best Trip Designers for
-          you.
-        </p>
-      )}
       <h2 className="section-title-sm">Where would you like to go?</h2>
       <AnimatePresence>
         {isOpen && (
@@ -91,12 +56,8 @@ const Location = ({
             />
             <motion.input
               autoComplete={"off"}
-              onFocus={() => setOpen(true)}
-              onBlur={() => setInput(formData.country)}
               type="text"
               name="country"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
               placeholder={isOpen ? "Try 'Barcelona'" : "Where to go?"}
             />
           </div>
@@ -108,7 +69,7 @@ const Location = ({
                   POPULAR DESTINATIONS
                 </span>
               </li>
-              {cities.data.slice(0, 4).map((city, i) => {
+              {/* {cities.data.slice(0, 4).map((city, i) => {
                 return (
                   <motion.li
                     onClick={() => {
@@ -125,20 +86,11 @@ const Location = ({
                     </span>
                   </motion.li>
                 );
-              })}
+              })} */}
             </ul>
           )}
         </div>
       </div>
-
-      <StepperNavigation
-        currentStep={currentStep}
-        nextStep={nextStep}
-        prevStep={prevStep}
-        validateCheck={validateCheck}
-        setData={setData}
-        indivisualFormData={formData}
-      />
     </>
   );
 };
