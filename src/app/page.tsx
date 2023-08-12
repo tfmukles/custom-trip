@@ -3,37 +3,18 @@ import Default from "@/components/Default";
 import Modal from "@/components/Modal";
 import Step from "@/components/Step";
 import StepperBanner from "@/components/StepperBanner";
-import { SteppersContext, steps } from "@/layouts/steppersContext";
+import {
+  SteppersContext,
+  steps,
+  useStepperContext,
+} from "@/layouts/steppersContext";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 type StepKey = keyof typeof steps;
 
 const Home = () => {
-  const [travelDetails, setTravel] = useState({
-    country: "",
-    date: "",
-    adults: 0,
-    children: {
-      total: 0,
-      ages: [],
-    },
-    range: {
-      from: 0,
-      to: 0,
-    },
-    desired: [],
-    consideration: false,
-    travelVibe: "",
-  });
-
-  console.log({ travelDetails });
-
-  const onTrvelDataChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    setTravel((prev) => ({ ...prev, [name]: value }));
-  };
-
+  const steperContext = useStepperContext();
   const [isOpen, setOpen] = useState(false);
   let [step, setStep] = useState<number>(0);
   const onOpen = () => setOpen(true);
@@ -47,6 +28,7 @@ const Home = () => {
   let DynamicContent = steps[step as StepKey]?.Content ?? Default;
   const nextStep = () => setStep((step) => step + 1);
   const prevStep = () => setStep((step) => step - 1);
+  const [data, setData] = useState({});
 
   return (
     <div className="section  bg-[#0e2c23]">
@@ -87,39 +69,22 @@ const Home = () => {
                       )}
                     </div>
                     <div className="md:col-9 col">
-                      <SteppersContext.Provider
-                        value={{
-                          steps,
-                          nextStep,
-                          currentStep: step,
-                          travel: travelDetails,
-                          setTravel: onTrvelDataChange,
-                        }}
-                      >
-                        <div className="h-full flex flex-col">
-                          <DynamicContent />
-                          <div className="mt-auto flex justify-between">
-                            {step >= 2 && (
-                              <button
-                                type="button"
-                                onClick={prevStep}
-                                className="btn underline hover:bg-theme-light"
-                              >
-                                Back
-                              </button>
-                            )}
-                            {step < Object.keys(steps).length && (
-                              <button
-                                type="button"
-                                onClick={nextStep}
-                                className="btn btn-primary ml-auto"
-                              >
-                                Next
-                              </button>
-                            )}
-                          </div>
-                        </div>
-                      </SteppersContext.Provider>
+                      <div className="h-full flex flex-col">
+                        <SteppersContext.Provider
+                          value={{
+                            data,
+                            setData,
+                          }}
+                        >
+                          <DynamicContent
+                            currentStep={step}
+                            nextStep={nextStep}
+                            prevStep={prevStep}
+                            setFromData={setData}
+                            data={data}
+                          />
+                        </SteppersContext.Provider>
+                      </div>
                     </div>
                   </div>
                 </form>

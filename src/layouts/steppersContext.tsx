@@ -37,47 +37,10 @@ export const steps = {
 };
 
 export type GlobalContent = {
-  currentStep: number;
-  steps: { [key: number]: { label: string; Content: () => JSX.Element } };
-  nextStep?: any;
-  travel: {
-    country: string;
-    date: string;
-    adults: number;
-    children: {
-      total: number;
-      ages: number[];
-    };
-    range: {
-      from: number;
-      to: number;
-    };
-    desired: string[];
-    consideration: boolean;
-    travelVibe: string;
-  };
-  setTravel?: (data: any) => void;
+  data?: any;
+  setData?: any;
 };
 
-export const SteppersContext = createContext<GlobalContent>({
-  steps,
-  currentStep: 0,
-  travel: {
-    country: "",
-    date: "",
-    adults: 0,
-    children: {
-      total: 0,
-      ages: [],
-    },
-    range: {
-      from: 0,
-      to: 0,
-    },
-    desired: [],
-    consideration: false,
-    travelVibe: "",
-  },
-});
+export const SteppersContext = createContext<GlobalContent>({});
 
 export const useStepperContext = () => useContext(SteppersContext);
