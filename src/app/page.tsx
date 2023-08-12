@@ -3,11 +3,7 @@ import Default from "@/components/Default";
 import Modal from "@/components/Modal";
 import Step from "@/components/Step";
 import StepperBanner from "@/components/StepperBanner";
-import {
-  SteppersContext,
-  steps,
-  useStepperContext,
-} from "@/layouts/steppersContext";
+import { steps } from "@/layouts/steppersContext";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 type StepKey = keyof typeof steps;
@@ -25,7 +21,6 @@ const calculateHeight = ({
 };
 
 const Home = () => {
-  const steperContext = useStepperContext();
   const [isOpen, setOpen] = useState(false);
   let [step, setStep] = useState<number>(0);
   const onOpen = () => setOpen(true);
@@ -40,7 +35,6 @@ const Home = () => {
   const nextStep = () => setStep((step) => step + 1);
   const prevStep = () => setStep((step) => step - 1);
   const [data, setData] = useState({});
-  console.log({ data });
 
   return (
     <div className="section  bg-[#0e2c23]">
@@ -56,7 +50,14 @@ const Home = () => {
           <AnimatePresence>
             {isOpen && (
               <Modal onClose={onClose}>
-                <form className="max-w-[1000px] p-6 bg-white mx-auto">
+                <form
+                  name="contact"
+                  action="/pages/success"
+                  method="POST"
+                  data-netlify="true"
+                  className="max-w-[1000px] p-6 bg-white mx-auto"
+                >
+                  <input type="hidden" name="contact" value="name_of_my_form" />
                   <StepperBanner onClose={onClose} />
                   <div className="row gx-4">
                     <div
@@ -85,20 +86,13 @@ const Home = () => {
                     </div>
                     <div className="md:col-9 col">
                       <div className="h-full flex flex-col">
-                        <SteppersContext.Provider
-                          value={{
-                            data,
-                            setData,
-                          }}
-                        >
-                          <DynamicContent
-                            currentStep={step}
-                            nextStep={nextStep}
-                            prevStep={prevStep}
-                            setData={setData}
-                            data={data}
-                          />
-                        </SteppersContext.Provider>
+                        <DynamicContent
+                          currentStep={step}
+                          nextStep={nextStep}
+                          prevStep={prevStep}
+                          setData={setData}
+                          data={data}
+                        />
                       </div>
                     </div>
                   </div>

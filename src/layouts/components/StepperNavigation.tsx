@@ -5,6 +5,7 @@ const StepperNavigation = ({
   nextStep,
   prevStep,
   validateCheck,
+  data,
   setData,
   indivisualFormData,
 }: {
@@ -20,6 +21,18 @@ const StepperNavigation = ({
   const hasPrev = currentStep > 1;
   const isLastStep = currentStep === Object.keys(steps).length;
 
+  const onSubmit = (e: MouseEvent, data: any) => {
+    e.preventDefault();
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then(() => alert("Thank you for your submission"))
+      .catch((error) => alert(error));
+  };
+
   return (
     <div className="flex justify-between mt-auto">
       {hasPrev && (
@@ -30,11 +43,11 @@ const StepperNavigation = ({
       {hasNext && (
         <button
           type={isLastStep ? "submit" : "button"}
-          onClick={() => {
+          onClick={(e) => {
             let isError = validateCheck && validateCheck();
             if (!isError) {
               setData((data: any) => ({ ...data, ...indivisualFormData }));
-              !isLastStep && nextStep();
+              !isLastStep ? nextStep() : onSubmit(e as any, data);
             }
           }}
           className="btn btn-primary ml-auto"

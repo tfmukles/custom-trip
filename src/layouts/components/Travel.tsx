@@ -80,7 +80,7 @@ const Travel = ({
             onChange={(e) => {
               onUpdate({ [`children-${i + 1}`]: e.target.value });
             }}
-            value={(formData as any)[`children-${i + 1}`]}
+            value={(formData as any)[`children-${i + 1}`] ?? ""}
             type="number"
             className="p-3"
             placeholder="0-17"
@@ -97,6 +97,7 @@ const Travel = ({
         prevStep={prevStep}
         validateCheck={validateCheck}
         setData={setData}
+        data={data}
         indivisualFormData={formData}
       />
     </>

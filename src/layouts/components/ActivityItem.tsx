@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ActivitesItem = ({
   activities,
@@ -26,16 +26,15 @@ const ActivitesItem = ({
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleOutsideClick = (e: React.MouseEvent<HTMLElement>) => {
+    function handleOutsideClick(e: MouseEvent) {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
         if (isOpen) {
           setOpen(false);
         }
       }
-    };
-    document.addEventListener("click", (e) => handleOutsideClick(e));
-    return () =>
-      document.removeEventListener("click", (e) => handleOutsideClick(e));
+    }
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
   }, [rootRef, isOpen]);
 
   return (

@@ -32,6 +32,7 @@ const Extra = ({
         nextStep={nextStep}
         prevStep={prevStep}
         setData={setData}
+        data={data}
         indivisualFormData={formData}
       />
     </>
