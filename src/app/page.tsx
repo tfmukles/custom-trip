@@ -13,12 +13,24 @@ import { useState } from "react";
 
 type StepKey = keyof typeof steps;
 
+const calculateHeight = ({
+  currentStep,
+  totalSteps,
+}: {
+  currentStep: number;
+  totalSteps: number;
+}) => {
+  return currentStep === totalSteps
+    ? "100%"
+    : `65px + ${100 * (currentStep - 1)}px`;
+};
+
 const Home = () => {
   const steperContext = useStepperContext();
   const [isOpen, setOpen] = useState(false);
   let [step, setStep] = useState<number>(0);
   const onOpen = () => setOpen(true);
-  const onClose = (e: React.MouseEvent) => {
+  const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     const target = e.target as HTMLElement;
     if (!target.closest(".modal-body")) {
       setOpen(false);
@@ -50,7 +62,10 @@ const Home = () => {
                     <div
                       style={
                         {
-                          "--height": `${65 + (step - 1) * 100}px`,
+                          "--height": calculateHeight({
+                            currentStep: step,
+                            totalSteps: Object.keys(steps).length,
+                          }),
                         } as React.CSSProperties
                       }
                       className="stepper-steps col-1 md:col-3"
@@ -81,7 +96,6 @@ const Home = () => {
                             nextStep={nextStep}
                             prevStep={prevStep}
                             setFromData={setData}
-                            data={data}
                           />
                         </SteppersContext.Provider>
                       </div>

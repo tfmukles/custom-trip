@@ -38,6 +38,7 @@ const Location = ({
 }) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
+    key: "location",
   });
   const [cities, setCities] = useState<{ isLoading: boolean; data: string[] }>({
     isLoading: true,

@@ -4,20 +4,32 @@ import StepperNavigation from "./StepperNavigation";
 
 const activities = [
   {
-    label: "Beatch",
-    children: [{ label: "Beatch" }],
+    label: "Must See Attractions",
+    children: [{ label: "1" }, { label: "2" }, { label: "3" }],
+  },
+  {
+    label: "Beach",
+  },
+  {
+    label: "Local Culture",
   },
 ];
 
-const initialState = {
-  activities: [] as string[],
-};
+interface state {
+  activities: Array<{
+    label: string;
+    children?: Array<{
+      label: string;
+    }>;
+  }>;
+}
 
-type state = typeof initialState;
+const initialState: state = {
+  activities: [],
+};
 
 const Activities = ({
   currentStep,
-  setFromData,
   nextStep,
   prevStep,
 }: {
@@ -26,16 +38,10 @@ const Activities = ({
   nextStep: () => void;
   prevStep: () => void;
 }) => {
-  const { formData, isError } = useForm<state>({ initialState });
-
-  const toggleActivity = (activity: string) => {
-    const newActivities = [...formData.activities];
-    if (newActivities.includes(activity)) {
-      newActivities.splice(newActivities.indexOf(activity), 1);
-    } else {
-      newActivities.push(activity);
-    }
-  };
+  const { formData, isError, toggleaActivity, validateCheck } = useForm<state>({
+    initialState,
+    key: "activities",
+  });
 
   return (
     <>
@@ -46,7 +52,11 @@ const Activities = ({
         </p>
       )}
       <h2 className="section-title-sm">What do you want to do there?</h2>
-      <ActivitesItem activities={activities} />
+      <ActivitesItem
+        toggleActives={toggleaActivity}
+        activities={activities}
+        selectedActivities={formData.activities}
+      />
 
       <div className="mt-4">
         <input type="checkbox" name="considerations" id="considerations" />
@@ -59,6 +69,7 @@ const Activities = ({
         currentStep={currentStep}
         nextStep={nextStep}
         prevStep={prevStep}
+        validateCheck={validateCheck}
       />
     </>
   );

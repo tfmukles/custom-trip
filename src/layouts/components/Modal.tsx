@@ -1,13 +1,13 @@
 import DynamicIcon from "@/helpers/DynamicIcon";
 import { motion } from "framer-motion";
-import { MouseEvent } from "react";
+import React from "react";
 
 const Modal = ({
   children,
   onClose,
 }: {
   children: React.ReactNode;
-  onClose: (event: MouseEvent) => void;
+  onClose: (event: React.MouseEvent<HTMLDivElement>) => void;
 }) => {
   return (
     <motion.div

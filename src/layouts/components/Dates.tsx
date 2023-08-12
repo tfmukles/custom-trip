@@ -25,11 +25,12 @@ const Dates = ({
 }) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
+    key: "dates",
   });
   const [state, setState] = useState([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: new Date(formData.startDate),
+      endDate: new Date(formData.endDate),
       key: "selection",
     },
   ]);
@@ -49,8 +50,9 @@ const Dates = ({
       )}
       <h2 className="section-title-sm">When would you like to travel?</h2>
       <DateRangePicker
-        onChange={(item) => setState([item.selection])}
-        moveRangeOnFirstSelection={false}
+        onChange={(item) => {
+          setState([item.selection]);
+        }}
         months={2}
         ranges={state}
         direction="horizontal"

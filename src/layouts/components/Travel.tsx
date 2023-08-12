@@ -21,6 +21,7 @@ const Travel = ({
 }) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
+    key: "travel",
   });
 
   const { adults, children } = formData;

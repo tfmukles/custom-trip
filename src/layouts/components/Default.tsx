@@ -2,12 +2,10 @@ import StepperNavigation from "./StepperNavigation";
 
 const Default = ({
   currentStep,
-  setFromData,
   nextStep,
   prevStep,
 }: {
   currentStep: number;
-  setFromData?: any;
   nextStep: () => void;
   prevStep: () => void;
 }) => {

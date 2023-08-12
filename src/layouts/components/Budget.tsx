@@ -21,6 +21,7 @@ const Budget = ({
 }) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
+    key: "budget",
   });
 
   return (

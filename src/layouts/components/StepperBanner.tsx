@@ -3,7 +3,7 @@ import Image from "next/image";
 const StepperBanner = ({
   onClose,
 }: {
-  onClose: (event: MouseEvent) => void;
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
   return (
     <div className="relative">

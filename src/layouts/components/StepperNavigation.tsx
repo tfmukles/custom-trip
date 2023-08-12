@@ -11,7 +11,7 @@ const StepperNavigation = ({
   prevStep: () => void;
   validateCheck?: () => void;
 }) => {
-  const hasNext = currentStep < Object.keys(steps).length;
+  const hasNext = currentStep <= Object.keys(steps).length;
   const hasPrev = currentStep > 1;
 
   return (
@@ -26,13 +26,14 @@ const StepperNavigation = ({
           type="button"
           onClick={() => {
             let isError = validateCheck && validateCheck();
+            console.log({ isError });
             if (!isError) {
               nextStep();
             }
           }}
           className="btn btn-primary ml-auto"
         >
-          Next
+          {Object.keys(steps).length === currentStep ? "Finish" : "Next"}
         </button>
       )}
     </div>

@@ -1,42 +1,93 @@
 import { useState } from "react";
-export const useForm = <T>({ initialState }: { initialState: T }) => {
-  const [formData, setFormData] = useState<T>(initialState);
+export const useForm = <T>({
+  initialState,
+  key,
+}: {
+  initialState: T;
+  key: string;
+}) => {
+  const [formData, setFormData] = useState<T>(
+    localStorage.getItem(key)
+      ? JSON.parse(localStorage.getItem(key) as string)
+      : initialState,
+  );
   const [isError, setError] = useState<boolean>(false);
 
-  const onChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const onUpdate = (updatedState: any) => {
-    setFormData({ ...formData, ...updatedState });
+    const newData = { ...formData, ...updatedState };
+    setFormData(newData);
+    localStorage.setItem(key, JSON.stringify(newData));
   };
 
-  //Please complete this field so we can find the best Trip Designers for you.
+  const toggleaActivity = (activity: string, parentActivity?: string) => {
+    let selectedActivity = (formData as any).activities as Array<{
+      label: string;
+      children?: Array<{ label: string }>;
+    }>;
+
+    if (parentActivity) {
+      const isParentExit = selectedActivity.find(
+        (item) => item.label === parentActivity,
+      );
+
+      if (isParentExit) {
+        selectedActivity = selectedActivity.map((item) => {
+          if (item.label === parentActivity) {
+            return {
+              ...item,
+              children: item.children?.find((child) => child.label === activity)
+                ? item.children?.filter((child) => child.label !== activity)
+                : item.children
+                ? [{ label: activity }, ...item.children]
+                : [{ label: activity }],
+            };
+          }
+          return item;
+        });
+      } else {
+        selectedActivity.push({
+          label: parentActivity,
+          children: [{ label: activity }],
+        });
+      }
+    } else {
+      const isExists = selectedActivity.find((item) => item.label === activity);
+
+      if (isExists) {
+        selectedActivity = selectedActivity.filter(
+          (item) => item.label !== activity,
+        );
+      } else {
+        selectedActivity.push({ label: activity, children: [] });
+      }
+    }
+    localStorage.setItem(key, JSON.stringify({ activities: selectedActivity }));
+    setFormData({ activities: selectedActivity } as any);
+  };
 
   const validateCheck = () => {
     let isError = Object.values(formData as any).some((value: any) => {
       if (typeof value === "string" && value.trim() === "") {
-        return true; // Empty string
+        return true;
       }
       if (Array.isArray(value) && value.length === 0) {
-        return true; // Empty array
+        return true;
       }
       if (typeof value === "object" && Object.keys(value).length === 0) {
         if (value instanceof Date) {
-          return false; // Non-empty Date object
+          return false;
         }
-        return true; // Empty object (excluding Date)
+        return true;
       }
       if (value instanceof Date) {
-        return false; // Non-empty Date object
+        return false;
       }
 
-      return false; // None of the above conditions
+      return false;
     });
     setError(isError);
     return isError;
   };
 
-  return { formData, isError, onChange, onUpdate, validateCheck };
+  return { formData, isError, onUpdate, validateCheck, toggleaActivity };
 };
