@@ -213,7 +213,7 @@
 
         &::after {
           content: "";
-          @apply border-2 border-[#0e2c23] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%_+_10px)] h-[calc(100%_+_10px)] -z-[1] rounded-full bg-white;
+          @apply border-2 border-[#0e2c23] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%_+_10px)] h-[calc(100%_+_10px)] -z-[1] rounded-full bg-white delay-[500ms];
         }
       }
     }

@@ -1,4 +1,5 @@
 import { useForm } from "@/hooks/useForm";
+import { DynamicContent } from "@/types";
 import StepperNavigation from "./StepperNavigation";
 
 const initialState = {
@@ -10,15 +11,11 @@ type state = typeof initialState;
 
 const Budget = ({
   currentStep,
-  setFromData,
   nextStep,
   prevStep,
-}: {
-  currentStep: number;
-  setFromData?: any;
-  nextStep: () => void;
-  prevStep: () => void;
-}) => {
+  data,
+  setData,
+}: DynamicContent) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
     key: "budget",
@@ -79,6 +76,8 @@ const Budget = ({
         nextStep={nextStep}
         prevStep={prevStep}
         validateCheck={validateCheck}
+        setData={setData}
+        indivisualFormData={formData}
       />
     </>
   );

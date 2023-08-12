@@ -1,4 +1,5 @@
 import { useForm } from "@/hooks/useForm";
+import { DynamicContent } from "@/types";
 import ActivitesItem from "./ActivityItem";
 import StepperNavigation from "./StepperNavigation";
 
@@ -22,26 +23,27 @@ interface state {
       label: string;
     }>;
   }>;
+
+  considerations: boolean;
 }
 
 const initialState: state = {
   activities: [],
+  considerations: false,
 };
 
 const Activities = ({
   currentStep,
   nextStep,
   prevStep,
-}: {
-  currentStep: number;
-  setFromData?: any;
-  nextStep: () => void;
-  prevStep: () => void;
-}) => {
-  const { formData, isError, toggleaActivity, validateCheck } = useForm<state>({
-    initialState,
-    key: "activities",
-  });
+  data,
+  setData,
+}: DynamicContent) => {
+  const { formData, isError, toggleaActivity, validateCheck, onUpdate } =
+    useForm<state>({
+      initialState,
+      key: "activities",
+    });
 
   return (
     <>
@@ -59,7 +61,13 @@ const Activities = ({
       />
 
       <div className="mt-4">
-        <input type="checkbox" name="considerations" id="considerations" />
+        <input
+          onChange={(e) => onUpdate({ considerations: e.target.checked })}
+          checked={formData.considerations}
+          type="checkbox"
+          name="considerations"
+          id="considerations"
+        />
         <label className="ml-3" htmlFor="considerations">
           Any important considerations we should be aware of?
         </label>
@@ -70,6 +78,8 @@ const Activities = ({
         nextStep={nextStep}
         prevStep={prevStep}
         validateCheck={validateCheck}
+        setData={setData}
+        indivisualFormData={formData}
       />
     </>
   );

@@ -10,7 +10,6 @@ import {
 } from "@/layouts/steppersContext";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-
 type StepKey = keyof typeof steps;
 
 const calculateHeight = ({
@@ -41,6 +40,7 @@ const Home = () => {
   const nextStep = () => setStep((step) => step + 1);
   const prevStep = () => setStep((step) => step - 1);
   const [data, setData] = useState({});
+  console.log({ data });
 
   return (
     <div className="section  bg-[#0e2c23]">
@@ -95,7 +95,8 @@ const Home = () => {
                             currentStep={step}
                             nextStep={nextStep}
                             prevStep={prevStep}
-                            setFromData={setData}
+                            setData={setData}
+                            data={data}
                           />
                         </SteppersContext.Provider>
                       </div>

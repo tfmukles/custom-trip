@@ -1,4 +1,5 @@
 import { useForm } from "@/hooks/useForm";
+import { DynamicContent } from "@/types";
 import StepperNavigation from "./StepperNavigation";
 
 const initialState = [
@@ -7,21 +8,14 @@ const initialState = [
   },
 ];
 
-interface state {
-  label: string;
-}
-[];
-
 const Extra = ({
   currentStep,
   nextStep,
   prevStep,
-}: {
-  currentStep: number;
-  nextStep: () => void;
-  prevStep: () => void;
-}) => {
-  const { formData, isError } = useForm<state>({
+  data,
+  setData,
+}: DynamicContent) => {
+  const { formData, isError } = useForm<{ label: string }[]>({
     initialState,
     key: "extra",
   });
@@ -37,6 +31,8 @@ const Extra = ({
         currentStep={currentStep}
         nextStep={nextStep}
         prevStep={prevStep}
+        setData={setData}
+        indivisualFormData={formData}
       />
     </>
   );

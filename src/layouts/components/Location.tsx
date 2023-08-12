@@ -1,5 +1,6 @@
 import DynamicIcon from "@/helpers/DynamicIcon";
 import { useForm } from "@/hooks/useForm";
+import { DynamicContent } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import StepperNavigation from "./StepperNavigation";
@@ -31,11 +32,9 @@ const Location = ({
   currentStep,
   nextStep,
   prevStep,
-}: {
-  currentStep: number;
-  nextStep: () => void;
-  prevStep: () => void;
-}) => {
+  data,
+  setData,
+}: DynamicContent) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
     key: "location",
@@ -137,6 +136,8 @@ const Location = ({
         nextStep={nextStep}
         prevStep={prevStep}
         validateCheck={validateCheck}
+        setData={setData}
+        indivisualFormData={formData}
       />
     </>
   );

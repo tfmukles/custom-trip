@@ -66,14 +66,14 @@ export const useForm = <T>({
   };
 
   const validateCheck = () => {
-    let isError = Object.values(formData as any).some((value: any) => {
+    let isError = Object.entries(formData as any).some(([key, value]) => {
       if (typeof value === "string" && value.trim() === "") {
         return true;
       }
       if (Array.isArray(value) && value.length === 0) {
         return true;
       }
-      if (typeof value === "object" && Object.keys(value).length === 0) {
+      if (typeof value === "object" && Object.keys(value as any).length === 0) {
         if (value instanceof Date) {
           return false;
         }

@@ -5,14 +5,20 @@ const StepperNavigation = ({
   nextStep,
   prevStep,
   validateCheck,
+  setData,
+  indivisualFormData,
 }: {
+  indivisualFormData?: any;
   currentStep: number;
   nextStep: () => void;
   prevStep: () => void;
   validateCheck?: () => void;
+  data?: any;
+  setData: any;
 }) => {
   const hasNext = currentStep <= Object.keys(steps).length;
   const hasPrev = currentStep > 1;
+  const isLastStep = currentStep === Object.keys(steps).length;
 
   return (
     <div className="flex justify-between mt-auto">
@@ -23,17 +29,17 @@ const StepperNavigation = ({
       )}
       {hasNext && (
         <button
-          type="button"
+          type={isLastStep ? "submit" : "button"}
           onClick={() => {
             let isError = validateCheck && validateCheck();
-            console.log({ isError });
             if (!isError) {
-              nextStep();
+              setData((data: any) => ({ ...data, ...indivisualFormData }));
+              !isLastStep && nextStep();
             }
           }}
           className="btn btn-primary ml-auto"
         >
-          {Object.keys(steps).length === currentStep ? "Finish" : "Next"}
+          {isLastStep ? "Finish" : "Next"}
         </button>
       )}
     </div>

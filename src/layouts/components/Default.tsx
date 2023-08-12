@@ -1,14 +1,13 @@
+import { DynamicContent } from "@/types";
 import StepperNavigation from "./StepperNavigation";
 
 const Default = ({
   currentStep,
   nextStep,
   prevStep,
-}: {
-  currentStep: number;
-  nextStep: () => void;
-  prevStep: () => void;
-}) => {
+  data,
+  setData,
+}: DynamicContent) => {
   return (
     <>
       <h1 className="section-title">Let’s start planning your trip</h1>
@@ -20,6 +19,7 @@ const Default = ({
         currentStep={currentStep}
         nextStep={nextStep}
         prevStep={prevStep}
+        setData={setData}
       />
     </>
   );

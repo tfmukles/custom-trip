@@ -73,3 +73,11 @@ export type Button = {
   label: string;
   link: string;
 };
+
+export interface DynamicContent {
+  currentStep: number;
+  nextStep: () => void;
+  prevStep: () => void;
+  data: any;
+  setData: any;
+}

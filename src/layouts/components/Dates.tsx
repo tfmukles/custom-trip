@@ -1,4 +1,5 @@
 import { useForm } from "@/hooks/useForm";
+import { DynamicContent } from "@/types";
 import { useEffect, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
@@ -14,15 +15,11 @@ type state = typeof initialState;
 
 const Dates = ({
   currentStep,
-  setFromData,
   nextStep,
   prevStep,
-}: {
-  currentStep: number;
-  setFromData?: any;
-  nextStep: () => void;
-  prevStep: () => void;
-}) => {
+  data,
+  setData,
+}: DynamicContent) => {
   const { formData, isError, onUpdate, validateCheck } = useForm<state>({
     initialState,
     key: "dates",
@@ -50,7 +47,7 @@ const Dates = ({
       )}
       <h2 className="section-title-sm">When would you like to travel?</h2>
       <DateRangePicker
-        onChange={(item) => {
+        onChange={(item: any) => {
           setState([item.selection]);
         }}
         months={2}
@@ -64,6 +61,8 @@ const Dates = ({
         nextStep={nextStep}
         prevStep={prevStep}
         validateCheck={validateCheck}
+        setData={setData}
+        indivisualFormData={formData}
       />
     </>
   );
