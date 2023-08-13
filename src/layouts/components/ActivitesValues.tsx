@@ -6,12 +6,16 @@ const ActivitiesValues = ({
   selectedActivites: intersettodo[];
 }) => {
   return selectedActivites.map((item, index) => (
-    <input
-      key={index}
-      type="hidden"
-      name={`activites[${index}].label`}
-      value={item.label}
-    />
+    <>
+      <input
+        key={index}
+        type="hidden"
+        name={`activites[${index}].label`}
+        value={item.label}
+      />
+
+      {item.children && <ActivitiesValues selectedActivites={item.children} />}
+    </>
   ));
 };
 

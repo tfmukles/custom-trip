@@ -259,6 +259,7 @@ const About = () => {
             {isOpen && (
               <Modal onClose={onClose}>
                 <form
+                  method="POST"
                   data-netlify="true"
                   name="contact"
                   onSubmit={onSubmitHandler}
