@@ -259,10 +259,9 @@ const About = () => {
             {isOpen && (
               <Modal onClose={onClose}>
                 <form
-                  name="my-form"
-                  action="/"
+                  name="contact"
                   method="POST"
-                  netlify-honeypot="bot-field"
+                  data-netlify="true"
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
                   <input type="hidden" name="form-name" value="contact" />
