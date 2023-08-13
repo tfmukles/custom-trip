@@ -28,6 +28,7 @@ const Contact = async () => {
                 action="/"
                 method="POST"
                 netlify-honeypot="bot-field"
+                data-netlify="true"
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <div className="mb-6">
