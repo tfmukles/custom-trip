@@ -6,6 +6,33 @@ type props = IFormData & {
 };
 
 const Travel = ({ updateFields, travelers, isError }: props) => {
+  const onAgesChange = (e: React.ChangeEvent<HTMLInputElement>, node: any) => {
+    Object.entries(travelers.ages).forEach(([key, value]) => {
+      if (key === node) {
+        updateFields({
+          travelers: {
+            ...travelers,
+            ages: {
+              ...travelers.ages,
+              [node]: {
+                [e.target.name]: e.target.value,
+              },
+            },
+          },
+        });
+      } else {
+        updateFields({
+          travelers: {
+            ...travelers,
+            ages: {
+              ...travelers.ages,
+              [key]: value,
+            },
+          },
+        });
+      }
+    });
+  };
   return (
     <>
       {isError && (
@@ -85,22 +112,23 @@ const Travel = ({ updateFields, travelers, isError }: props) => {
       </div>
 
       <div className="w-full h-0.5 bg-theme-light mt-10" />
-      {[...Array(parseInt(travelers.children)).keys()].map((i) => (
-        <div className="mt-5" key={i}>
-          <p className="text-sm text-dark mb-3">Children {i + 1} age</p>
-          <input
-            name={`travelers[ages][${i}]`}
-            onChange={(e) => {}}
-            type="number"
-            className="p-3"
-            placeholder="0-17"
-            value={travelers.ages[i] || 0}
-          />
-          <small className="hidden text-red-500 mt-2">
-            Enter children age.
-          </small>
-        </div>
-      ))}
+      {[...Array(parseInt(travelers.children)).keys()].map((i) => {
+        return (
+          <div className="mt-5" key={i}>
+            <p className="text-sm text-dark mb-3">Children {i + 1} age</p>
+            <input
+              name={`travelers[ages][${i}]`}
+              type="number"
+              className="p-3"
+              placeholder="0-17"
+              value={travelers.ages[i] || 0}
+            />
+            <small className="hidden text-red-500 mt-2">
+              Enter children age.
+            </small>
+          </div>
+        );
+      })}
     </>
   );
 };

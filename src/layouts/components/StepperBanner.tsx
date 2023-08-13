@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const StepperBanner = ({
   onClose,
 }: {
@@ -7,7 +5,7 @@ const StepperBanner = ({
 }) => {
   return (
     <div className="relative">
-      <Image
+      <img
         src={"/images/intro-default.jpg"}
         className="mb-6"
         width={1000}

@@ -23,13 +23,7 @@ const Contact = async () => {
         <div className="container">
           <div className="row">
             <div className="mx-auto md:col-10 lg:col-6">
-              <form
-                name="my-form"
-                action="/"
-                method="POST"
-                netlify-honeypot="bot-field"
-                data-netlify="true"
-              >
+              <form name="my-form" data-netlify="true">
                 <input type="hidden" name="form-name" value="contact" />
                 <div className="mb-6">
                   <label htmlFor="name" className="form-label">
