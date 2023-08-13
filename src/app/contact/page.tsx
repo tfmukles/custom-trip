@@ -1,3 +1,5 @@
+"use client";
+
 import config from "@/config/config.json";
 import { getListPage } from "@/lib/contentParser";
 import PageHeader from "@/partials/PageHeader";
