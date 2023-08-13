@@ -236,8 +236,8 @@ const About = () => {
               <Modal onClose={onClose}>
                 <form
                   name="contact"
-                  method="POST"
                   data-netlify="true"
+                  method="post"
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
                   <input type="hidden" name="form-name" value="contact" />
