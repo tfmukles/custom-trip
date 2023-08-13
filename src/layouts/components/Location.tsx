@@ -81,6 +81,7 @@ const Location = ({ updateFields, location, isError }: props) => {
                 setInput(e.target.value);
                 updateFields({ location: { name: e.target.value } });
               }}
+              className={`${input && !isOpen ? "text-primary" : ""}`}
               autoComplete={"off"}
               type="text"
               name="country"

@@ -271,7 +271,13 @@ const About = () => {
                               if (currentStepIndex < 0) {
                                 next();
                               } else {
-                                if (!isValidate(label, data, schema)) {
+                                if (
+                                  !isValidate(
+                                    label as keyof FormData,
+                                    data,
+                                    schema,
+                                  )
+                                ) {
                                   next();
                                 }
                               }
