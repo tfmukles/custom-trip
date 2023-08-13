@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const Contact = async () => {
+const Contact = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
