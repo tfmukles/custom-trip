@@ -60,6 +60,11 @@ const Contact = async () => {
                     placeholder="Message goes here..."
                     rows={8}
                   ></textarea>
+                  <input
+                    type="text"
+                    value={"hdfkadkfjklasa"}
+                    name="locaction[country]"
+                  />
                   <input type="hidden" name="hidden" value={"test"} />
                   <input type="string" name="string" value={"string"} />
                 </div>
