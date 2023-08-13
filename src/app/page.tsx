@@ -241,6 +241,7 @@ const About = () => {
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
                   <input type="hidden" name="form-name" value="trip-plan" />
+                  <input type="hidden" name="testing" value={"testing"} />
                   <StepperBanner onClose={onClose} />
                   <div className="row gx-4">
                     <div
