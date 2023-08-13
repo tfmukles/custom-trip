@@ -89,11 +89,12 @@ const Travel = ({ updateFields, travelers, isError }: props) => {
         <div className="mt-5" key={i}>
           <p className="text-sm text-dark mb-3">Children {i + 1} age</p>
           <input
-            name={`children-${i + 1}`}
+            name={`travelers[ages][${i}]`}
             onChange={(e) => {}}
             type="number"
             className="p-3"
             placeholder="0-17"
+            value={travelers.ages[i] || 0}
           />
           <small className="hidden text-red-500 mt-2">
             Enter children age.

@@ -100,20 +100,6 @@ const INITIAL_DATA: IFormData = {
 
 type keys = keyof FormData;
 
-const encode = (data: any) => {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-};
-
-let getPairs = (obj: any, keys: any = []) =>
-  Object.entries(obj).reduce((pairs: any, [key, value]) => {
-    if (typeof value === "object")
-      pairs.push(...getPairs(value, [...keys, key]));
-    else pairs.push([[...keys, key], value]);
-    return pairs;
-  }, []);
-
 const About = () => {
   const [hasError, setError] = useState(false);
   const [data, setData] = useState<IFormData>(INITIAL_DATA);
@@ -182,16 +168,6 @@ const About = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const data2 = Object.fromEntries([...formData.entries()]);
-
-    console.log(data2);
-
-    let x = getPairs(data)
-      .map(
-        ([[key0, ...keysRest], value]: any) =>
-          `${key0}${keysRest.map((a: any) => `[${a}]`).join("")}=${value}`,
-      )
-      .join("&");
 
     fetch("/", {
       method: "POST",
