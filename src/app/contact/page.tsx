@@ -26,9 +26,6 @@ const Contact = async () => {
               <form name="contact" data-netlify="true" method="post">
                 <input type="hidden" name="form-name" value="contact" />
                 <div className="mb-6">
-                  <label htmlFor="name" className="form-label">
-                    Full Name <span className="text-red-500">*</span>
-                  </label>
                   <input
                     id="name"
                     name="user[name]"
@@ -38,11 +35,7 @@ const Contact = async () => {
                   />
                 </div>
                 <div className="mb-6">
-                  <label htmlFor="email" className="form-label">
-                    Working Mail <span className="text-red-500">*</span>
-                  </label>
                   <input
-                    id="email"
                     name="user[email]"
                     className="form-input"
                     placeholder="john.doe@email.com"
@@ -50,9 +43,6 @@ const Contact = async () => {
                   />
                 </div>
                 <div className="mb-6">
-                  <label htmlFor="message" className="form-label">
-                    Anything else? <span className="text-red-500">*</span>
-                  </label>
                   <textarea
                     id="message"
                     name="message"
