@@ -1,12 +1,17 @@
 "use client";
 
+import Activities from "@/components/Activities";
+import Budget from "@/components/Budget";
 import Dates from "@/components/Dates";
+import Default from "@/components/Default";
+import Extra from "@/components/Extra";
 import Location from "@/components/Location";
 import Modal from "@/components/Modal";
 import Step from "@/components/Step";
 import StepperBanner from "@/components/StepperBanner";
-import StepperNavigation from "@/components/StepperNavigation";
+import Travel from "@/components/Travel";
 import { useMultistepForm } from "@/hooks/useMultiStepForm";
+import { FormData } from "@/types";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -17,32 +22,7 @@ const calculateHeight = ({
   currentStep: number;
   totalSteps: number;
 }) => {
-  return currentStep === totalSteps
-    ? "100%"
-    : `65px + ${100 * (currentStep - 1)}px`;
-};
-
-type FormData = {
-  location: {
-    name: string;
-  };
-  dates: {};
-  travelers: {
-    adults: string;
-    children: string;
-    ages: [];
-  };
-  budget: {
-    form: string;
-    to: string;
-  };
-  activites: {
-    intersettodo: [];
-    considerations: boolean;
-  };
-  extra: {
-    vibe: [];
-  };
+  return currentStep === totalSteps ? "100%" : `65px + ${100 * currentStep}px`;
 };
 
 const schema = {
@@ -52,7 +32,12 @@ const schema = {
     },
   },
   dates: {
-    require: true,
+    startDate: {
+      require: true,
+    },
+    endDate: {
+      require: true,
+    },
   },
   travelers: {
     adults: {
@@ -89,10 +74,13 @@ const INITIAL_DATA: FormData = {
   location: {
     name: "",
   },
-  dates: {},
+  dates: {
+    startDate: "",
+    endDate: "",
+  },
   travelers: {
-    adults: "",
-    children: "",
+    adults: "1",
+    children: "0",
     ages: [],
   },
   budget: {
@@ -108,29 +96,62 @@ const INITIAL_DATA: FormData = {
   },
 };
 
-type Schema = { [key: string]: { required: boolean } };
-
-const validate = (
-  label: keyof FormData,
-  data: FormData,
-  schema: Schema,
-): boolean => {
-  const currentData = data[label];
-  let currentSchema = schema[label];
-
-  return true; // Default to true for now, you can add more validation logic here
-};
+type keys = keyof FormData;
 
 const About = () => {
+  const [hasError, setError] = useState(false);
   const [data, setData] = useState(INITIAL_DATA);
   const [isOpen, setOpen] = useState(false);
-
   const onOpen = () => setOpen(true);
   const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     const target = e.target as HTMLElement;
     if (!target.closest(".modal-body")) {
       setOpen(false);
     }
+  };
+
+  const isValidate = (
+    label: keyof FormData,
+    data: FormData,
+    schema: any,
+  ): any => {
+    const currentData: any = data[label];
+    let currentSchema = schema[label];
+    console.log(currentSchema);
+
+    const isErrors = Array.from(Object.entries(currentSchema)).map(
+      ([key, value]) => {
+        if ((value as any)?.require === true) {
+          if (
+            typeof currentData[key] === "string" &&
+            currentData[key].length > 0
+          ) {
+            return true;
+          }
+          if (Array.isArray(currentData[key]) && currentData[key].length > 0) {
+            return true;
+          }
+
+          if (
+            typeof currentData[key] === "object" &&
+            Object.keys(currentData[key] as any).length === 0
+          ) {
+            if (currentData[key] instanceof Date) {
+              return true;
+            }
+
+            console.log("I am herr");
+
+            return false;
+          }
+
+          return false;
+        }
+        return true;
+      },
+    );
+    setError(isErrors.includes(false));
+    return isErrors.includes(false);
   };
 
   function updateFields(fields: Partial<FormData>) {
@@ -142,14 +163,46 @@ const About = () => {
     useMultistepForm([
       {
         label: "location",
-        component: <Location {...data} updateFields={updateFields} />,
+        component: (
+          <Location isError={hasError} {...data} updateFields={updateFields} />
+        ),
       },
       {
-        label: "Dates",
-        component: <Dates />,
+        label: "dates",
+        component: (
+          <Dates isError={hasError} {...data} updateFields={updateFields} />
+        ),
+      },
+      {
+        label: "travelers",
+        component: (
+          <Travel isError={hasError} {...data} updateFields={updateFields} />
+        ),
+      },
+      {
+        label: "budget",
+        component: (
+          <Budget isError={hasError} {...data} updateFields={updateFields} />
+        ),
+      },
+      {
+        label: "activites",
+        component: (
+          <Activities
+            isError={hasError}
+            {...data}
+            updateFields={updateFields}
+          />
+        ),
+      },
+      {
+        label: "extra",
+        component: (
+          <Extra isError={hasError} {...data} updateFields={updateFields} />
+        ),
       },
     ]);
-  const activeComponet = steps[currentStepIndex].component;
+  const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">
       <div className="container">
@@ -187,21 +240,42 @@ const About = () => {
                     >
                       {steps.map((item, i) => (
                         <Step
+                          key={i}
                           label={item.label}
-                          step={i + 1}
+                          step={i}
                           currentStep={currentStepIndex}
                         />
                       ))}
                     </div>
                     <div className="md:col-9 col">
                       <div className="h-full flex flex-col">
-                        {activeComponet}
-                        <StepperNavigation
-                          back={back}
-                          isFirstStep={isFirstStep}
-                          isLastStep={isLastStep}
-                          next={next}
-                        />
+                        {activeComponet ?? <Default />}
+                        <div className="flex justify-between mt-auto">
+                          {!isFirstStep && (
+                            <button
+                              onClick={back}
+                              type="button"
+                              className="btn btn-primary"
+                            >
+                              Prev
+                            </button>
+                          )}
+                          <button
+                            onClick={() => {
+                              if (currentStepIndex < 0) {
+                                next();
+                              } else {
+                                if (!isValidate(label, data, schema)) {
+                                  next();
+                                }
+                              }
+                            }}
+                            type={"button"}
+                            className="btn btn-primary ml-auto"
+                          >
+                            {isLastStep ? "Finish" : "Next"}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

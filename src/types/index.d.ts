@@ -81,3 +81,34 @@ export interface DynamicContent {
   data: any;
   setData: any;
 }
+
+export type FormData = {
+  location: {
+    name: string;
+  };
+  dates: {
+    startDate: string;
+    endDate: string;
+  };
+  travelers: {
+    adults: string;
+    children: string;
+    ages: [];
+  };
+  budget: {
+    form: string;
+    to: string;
+  };
+  activites: {
+    intersettodo: intersettodo[];
+    considerations: boolean;
+  };
+  extra: {
+    vibe: [];
+  };
+};
+
+interface intersettodo {
+  label: string;
+  children?: intersettodo[];
+}

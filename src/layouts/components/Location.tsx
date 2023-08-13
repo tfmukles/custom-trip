@@ -1,12 +1,7 @@
 import DynamicIcon from "@/helpers/DynamicIcon";
+import { FormData } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-
-const initialState = {
-  country: "",
-};
-
-type state = typeof initialState;
+import { useEffect, useState } from "react";
 
 const getCitites = async () => {
   const res = await fetch(
@@ -25,15 +20,34 @@ const getCitites = async () => {
   return data;
 };
 
-type props = {
+type props = FormData & {
   updateFields: (fields: Partial<any>) => void;
+  isError: boolean;
 };
 
-const Location = ({ updateFields }: props) => {
+const Location = ({ updateFields, location, isError }: props) => {
+  const [cities, setCities] = useState<{ isLoading: boolean; data: string[] }>({
+    isLoading: true,
+    data: [],
+  });
   const [isOpen, setOpen] = useState(false);
+  const [input, setInput] = useState(location.name);
   const onClose = () => setOpen(false);
+
+  useEffect(() => {
+    getCitites().then((res) => {
+      setCities({ data: res.data, isLoading: false });
+    });
+  }, []);
+
   return (
     <>
+      {isError && (
+        <p className="bg-red-300 p-3 rounded mb-5 text-dark">
+          Please complete this field so we can find the best Trip Designers for
+          you.
+        </p>
+      )}
       <h2 className="section-title-sm">Where would you like to go?</h2>
       <AnimatePresence>
         {isOpen && (
@@ -55,6 +69,18 @@ const Location = ({ updateFields }: props) => {
               icon="FaMagnifyingGlass"
             />
             <motion.input
+              onFocus={() => {
+                setInput("");
+                setOpen(true);
+              }}
+              onBlur={() => {
+                setInput(location.name);
+              }}
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                updateFields({ location: { name: e.target.value } });
+              }}
               autoComplete={"off"}
               type="text"
               name="country"
@@ -69,11 +95,12 @@ const Location = ({ updateFields }: props) => {
                   POPULAR DESTINATIONS
                 </span>
               </li>
-              {/* {cities.data.slice(0, 4).map((city, i) => {
+              {cities.data.slice(0, 4).map((city, i) => {
                 return (
                   <motion.li
                     onClick={() => {
-                      onUpdate({ country: city });
+                      setInput(city);
+                      updateFields({ location: { name: city } });
                       onClose();
                     }}
                     key={i}
@@ -86,7 +113,7 @@ const Location = ({ updateFields }: props) => {
                     </span>
                   </motion.li>
                 );
-              })} */}
+              })}
             </ul>
           )}
         </div>

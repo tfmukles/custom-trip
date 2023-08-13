@@ -1,26 +1,48 @@
-import { useState } from "react";
+import { FormData } from "@/types";
+import { useEffect, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-const initialState = {
-  startDate: new Date(),
-  endDate: new Date(),
+type props = FormData & {
+  updateFields: (fields: Partial<any>) => void;
+  isError: boolean;
 };
 
-type state = typeof initialState;
-
-const Dates = () => {
+const Dates = ({ updateFields, dates, isError }: props) => {
+  const [render, setRender] = useState(false);
   const [state, setState] = useState([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: dates.startDate ? new Date(dates.startDate) : new Date(),
+      endDate: dates.endDate ? new Date(dates.endDate) : new Date(),
       key: "selection",
     },
   ]);
 
+  useEffect(() => {
+    const { endDate, startDate } = state[0];
+    if (render) {
+      updateFields({
+        dates: {
+          startDate,
+          endDate,
+        },
+      });
+    }
+  }, [state]);
+
+  useEffect(() => {
+    setRender(true);
+  }, []);
+
   return (
     <>
+      {isError && (
+        <p className="bg-red-300 p-3 rounded mb-5 text-dark">
+          Please complete this field so we can find the best Trip Designers for
+          you.
+        </p>
+      )}
       <h2 className="section-title-sm">When would you like to travel?</h2>
       <DateRangePicker
         onChange={(item: any) => {

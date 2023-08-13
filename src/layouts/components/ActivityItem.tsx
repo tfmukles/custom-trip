@@ -1,25 +1,15 @@
 "use client";
-import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const ActivitesItem = ({
   activities,
-  selectedActivities,
-  toggleActives,
-  parentActivity,
 }: {
-  activities: Array<{
+  activities: {
     label: string;
-    children?: Array<{
+    children?: {
       label: string;
-    }>;
-  }>;
-  selectedActivities: Array<{
-    label: string;
-    children?: Array<{ label: string }>;
-  }>;
-  toggleActives: (activity: string, parentActivity?: string) => void;
-  parentActivity?: string;
+    }[];
+  }[];
 }) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -44,25 +34,11 @@ const ActivitesItem = ({
           <div role="button" className="r relative">
             <span
               ref={buttonRef}
-              onClick={() => {
-                setOpen(true);
-                toggleActives(activity.label, parentActivity);
-              }}
-              className={`text-dark text-sm p-2 m-2 border border-border ${
-                selectedActivities.find((selectedActivitie) => {
-                  if (parentActivity) {
-                    return selectedActivitie.label === activity.label;
-                  } else {
-                    return selectedActivitie.label === activity.label;
-                  }
-                })
-                  ? "bg-primary text-white"
-                  : ""
-              }`}
+              className={`text-dark text-sm p-2 m-2 border border-border`}
             >
               {activity.label}
             </span>
-            {activity.children && (
+            {/* {activity.children && (
               <AnimatePresence>
                 <div
                   ref={rootRef}
@@ -78,7 +54,7 @@ const ActivitesItem = ({
                   />
                 </div>
               </AnimatePresence>
-            )}
+            )} */}
           </div>
         </li>
       ))}

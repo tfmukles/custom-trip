@@ -1,26 +1,11 @@
-import { useForm } from "@/hooks/useForm";
-import { DynamicContent } from "@/types";
-import StepperNavigation from "./StepperNavigation";
+import { FormData } from "@/types";
 
-const initialState = {
-  from: "",
-  to: "",
+type props = FormData & {
+  updateFields: (fields: Partial<any>) => void;
+  isError: boolean;
 };
 
-type state = typeof initialState;
-
-const Budget = ({
-  currentStep,
-  nextStep,
-  prevStep,
-  data,
-  setData,
-}: DynamicContent) => {
-  const { formData, isError, onUpdate, validateCheck } = useForm<state>({
-    initialState,
-    key: "budget",
-  });
-
+const Budget = ({ updateFields, budget, isError }: props) => {
   return (
     <>
       {isError && (
@@ -45,24 +30,34 @@ const Budget = ({
         <div className="">
           <label className="block mb-3">From</label>
           <select
-            value={formData.from}
-            onChange={(e) => {
-              onUpdate({ from: e.target.value });
-            }}
+            value={budget.form}
+            onChange={(e) =>
+              updateFields({
+                budget: {
+                  ...budget,
+                  form: e.target.value,
+                },
+              })
+            }
           >
-            <option>From</option>
+            <option value={""}>From</option>
             <option value={"1000"}>$1000</option>
           </select>
         </div>
         <div className="">
           <label className="block mb-3">To</label>
           <select
-            value={formData.to}
-            onChange={(e) => {
-              onUpdate({ to: e.target.value });
-            }}
+            value={budget.to}
+            onChange={(e) =>
+              updateFields({
+                budget: {
+                  ...budget,
+                  to: e.target.value,
+                },
+              })
+            }
           >
-            <option>To</option>
+            <option value={""}>To</option>
             <option value={"1000"}>$1000</option>
           </select>
         </div>
@@ -70,15 +65,6 @@ const Budget = ({
       <p className="text-sm font-bold text-dark mt-3">
         How do we calculate your average budget?
       </p>
-
-      <StepperNavigation
-        currentStep={currentStep}
-        nextStep={nextStep}
-        prevStep={prevStep}
-        validateCheck={validateCheck}
-        setData={setData}
-        indivisualFormData={formData}
-      />
     </>
   );
 };

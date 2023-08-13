@@ -1,52 +1,44 @@
-import { useForm } from "@/hooks/useForm";
-import { DynamicContent } from "@/types";
-import StepperNavigation from "./StepperNavigation";
+import { FormData } from "@/types";
 
-const initialState = {
-  adults: 1,
-  children: 0,
+type props = FormData & {
+  updateFields: (fields: Partial<any>) => void;
+  isError: boolean;
 };
 
-type state = typeof initialState;
-
-const Travel = ({
-  currentStep,
-  nextStep,
-  prevStep,
-  data,
-  setData,
-}: DynamicContent) => {
-  const { formData, isError, onUpdate, validateCheck } = useForm<state>({
-    initialState,
-    key: "travel",
-  });
-  const { adults, children } = formData;
-
+const Travel = ({ updateFields, travelers, isError }: props) => {
   return (
     <>
-      {isError && (
-        <p className="bg-red-300 p-3 rounded mb-5 text-dark">
-          Please complete this field so we can find the best Trip Designers for
-          you.
-        </p>
-      )}
       <h2 className="section-title-sm">
         How many people are going on the trip?
       </h2>
       <div className="flex space-x-4 items-center">
         <button
-          onClick={() => onUpdate({ adults: adults - 1 })}
-          disabled={adults === 1}
           type="button"
+          onClick={() =>
+            updateFields({
+              travelers: {
+                ...travelers,
+                adults: parseInt(travelers.adults) - 1,
+              },
+            })
+          }
+          disabled={parseInt(travelers.adults) === 1}
           className="border border-border rounded px-6 py-1 text-xl font-bold"
         >
           -
         </button>
-        <div>{adults} Adults</div>
+        <div>{travelers.adults} Adults</div>
         <button
-          onClick={() => onUpdate({ adults: adults + 1 })}
+          onClick={() =>
+            updateFields({
+              travelers: {
+                ...travelers,
+                adults: parseInt(travelers.adults) + 1,
+              },
+            })
+          }
           type="button"
-          className="border border-border rounded px-6 py-1 text-xl font-bold"
+          className="border cursor-pointer border-border rounded px-6 py-1 text-xl font-bold"
         >
           +
         </button>
@@ -54,16 +46,30 @@ const Travel = ({
 
       <div className="flex space-x-4 items-center mt-8">
         <button
-          onClick={() => onUpdate({ children: children - 1 })}
-          disabled={children === 0}
+          onClick={() =>
+            updateFields({
+              travelers: {
+                ...travelers,
+                children: parseInt(travelers.children) - 1,
+              },
+            })
+          }
+          disabled={parseInt(travelers.children) === 0}
           type="button"
           className="border border-border rounded px-6 py-1 text-xl font-bold"
         >
           -
         </button>
-        <div>{children} Children</div>
+        <div>{travelers.children} Children</div>
         <button
-          onClick={() => onUpdate({ children: children + 1 })}
+          onClick={() =>
+            updateFields({
+              travelers: {
+                ...travelers,
+                children: parseInt(travelers.children) + 1,
+              },
+            })
+          }
           type="button"
           className="border border-border rounded px-6 py-1 text-xl font-bold"
         >
@@ -72,15 +78,12 @@ const Travel = ({
       </div>
 
       <div className="w-full h-0.5 bg-theme-light mt-10" />
-      {[...Array(children).keys()].map((i) => (
+      {[...Array(parseInt(travelers.children)).keys()].map((i) => (
         <div className="mt-5" key={i}>
           <p className="text-sm text-dark mb-3">Children {i + 1} age</p>
           <input
             name={`children-${i + 1}`}
-            onChange={(e) => {
-              onUpdate({ [`children-${i + 1}`]: e.target.value });
-            }}
-            value={(formData as any)[`children-${i + 1}`] ?? ""}
+            onChange={(e) => {}}
             type="number"
             className="p-3"
             placeholder="0-17"
@@ -90,16 +93,6 @@ const Travel = ({
           </small>
         </div>
       ))}
-
-      <StepperNavigation
-        currentStep={currentStep}
-        nextStep={nextStep}
-        prevStep={prevStep}
-        validateCheck={validateCheck}
-        setData={setData}
-        data={data}
-        indivisualFormData={formData}
-      />
     </>
   );
 };

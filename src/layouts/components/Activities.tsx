@@ -1,7 +1,5 @@
-import { useForm } from "@/hooks/useForm";
-import { DynamicContent } from "@/types";
+import { FormData } from "@/types";
 import ActivitesItem from "./ActivityItem";
-import StepperNavigation from "./StepperNavigation";
 
 const activities = [
   {
@@ -16,35 +14,49 @@ const activities = [
   },
 ];
 
-interface state {
-  activities: Array<{
-    label: string;
-    children?: Array<{
-      label: string;
-    }>;
-  }>;
-
-  considerations: boolean;
-}
-
-const initialState: state = {
-  activities: [],
-  considerations: false,
+type props = FormData & {
+  updateFields: (fields: Partial<any>) => void;
+  isError: boolean;
 };
 
-const Activities = ({
-  currentStep,
-  nextStep,
-  prevStep,
-  data,
-  setData,
-}: DynamicContent) => {
-  const { formData, isError, toggleaActivity, validateCheck, onUpdate } =
-    useForm<state>({
-      initialState,
-      key: "activities",
-    });
+const Activities = ({ updateFields, activites, isError }: props) => {
+  const toggleActives = (activity: string, parentActivity?: string) => {
+    let interestedTodo = activites.intersettodo;
+    if (parentActivity) {
+      const isParentFound = interestedTodo.find(
+        (item) => item.label === parentActivity,
+      );
 
+      if (isParentFound && isParentFound.children) {
+        const isChildrenExit = isParentFound.children.find(
+          (item) => item.label === activity,
+        );
+        if (isChildrenExit) {
+          isChildrenExit.children = isParentFound.children?.filter(
+            (item) => item.label !== activity,
+          );
+        } else {
+          isChildrenExit && isChildrenExit.push({ label: activity });
+        }
+      } else {
+        interestedTodo.push({
+          label: parentActivity,
+          children: [{ label: activity }],
+        });
+      }
+    } else {
+      const isAlreadyAdded = interestedTodo.find(
+        (item) => item.label === activity,
+      );
+      if (isAlreadyAdded) {
+        interestedTodo = interestedTodo.filter(
+          (item) => item.label !== activity,
+        );
+      } else {
+        interestedTodo.push({ label: activity, children: [] });
+      }
+    }
+  };
   return (
     <>
       {isError && (
@@ -54,33 +66,14 @@ const Activities = ({
         </p>
       )}
       <h2 className="section-title-sm">What do you want to do there?</h2>
-      <ActivitesItem
-        toggleActives={toggleaActivity}
-        activities={activities}
-        selectedActivities={formData.activities}
-      />
+      <ActivitesItem activities={activities} />
 
       <div className="mt-4">
-        <input
-          onChange={(e) => onUpdate({ considerations: e.target.checked })}
-          checked={formData.considerations}
-          type="checkbox"
-          name="considerations"
-          id="considerations"
-        />
+        <input type="checkbox" name="considerations" id="considerations" />
         <label className="ml-3" htmlFor="considerations">
           Any important considerations we should be aware of?
         </label>
       </div>
-
-      <StepperNavigation
-        currentStep={currentStep}
-        nextStep={nextStep}
-        prevStep={prevStep}
-        validateCheck={validateCheck}
-        setData={setData}
-        indivisualFormData={formData}
-      />
     </>
   );
 };
