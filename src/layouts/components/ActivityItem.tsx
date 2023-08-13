@@ -2,19 +2,20 @@
 import { intersettodo } from "@/types";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import ActivityWrapper from "./ActivityWrapper";
 
 const ActivitesItem = ({
-  activities,
+  activity,
   toggleActives,
   parentActivity,
   seletectActivities,
 }: {
-  activities: {
+  activity: {
     label: string;
     children?: {
       label: string;
     }[];
-  }[];
+  };
   toggleActives: (activity: string, parentActivity?: string) => void;
   parentActivity?: string;
   seletectActivities: intersettodo[];
@@ -36,45 +37,45 @@ const ActivitesItem = ({
   }, [rootRef, isOpen]);
 
   return (
-    <ul className="w-full flex flex-wrap daropdown">
-      {activities.map((activity, i) => (
-        <li key={i}>
-          <div role="button" className="r relative">
-            <span
-              onClick={() => {
-                activity.children && setOpen(true);
-                toggleActives(activity.label, parentActivity);
-              }}
-              ref={buttonRef}
-              className={`text-dark text-sm p-2 m-2 border border-border ${
-                seletectActivities?.find((item) => item.label == activity.label)
-                  ? "bg-primary text-white"
-                  : ""
+    <li>
+      <div role="button" className="relative">
+        <span
+          onClick={() => {
+            setOpen(true);
+            !activity.children && toggleActives(activity.label, parentActivity);
+          }}
+          ref={buttonRef}
+          className={`text-dark text-sm p-2 m-2 border border-border ${
+            seletectActivities.find((item) => item.label === activity.label)
+              ? "bg-primary text-white"
+              : ""
+          }`}
+        >
+          {activity?.label}
+        </span>
+        {activity.children && (
+          <AnimatePresence>
+            <div
+              ref={rootRef}
+              className={`absolute  dropdown min-w-[260px] top-[calc(100%_+_12px)] left-0 border border-theme-light bg-white shadow-lg rounded-sm py-2 ${
+                isOpen ? "block" : "hidden"
               }`}
             >
-              {activity.label}
-            </span>
-            {activity.children && (
-              <AnimatePresence>
-                <div
-                  ref={rootRef}
-                  className={`absolute  dropdown min-w-[260px] top-[calc(100%_+_12px)] left-0 border border-theme-light bg-white shadow-lg rounded-sm py-2 ${
-                    isOpen ? "block" : "hidden"
-                  }`}
-                >
-                  <ActivitesItem
-                    seletectActivities={seletectActivities}
-                    activities={activity.children}
-                    toggleActives={toggleActives}
-                    parentActivity={activity.label}
-                  />
-                </div>
-              </AnimatePresence>
-            )}
-          </div>
-        </li>
-      ))}
-    </ul>
+              <ActivityWrapper
+                activities={activity.children}
+                seletectActivities={
+                  seletectActivities.find(
+                    (item) => item.label === activity.label,
+                  )?.children || []
+                }
+                toggleActives={toggleActives}
+                parentActivity={activity.label}
+              />
+            </div>
+          </AnimatePresence>
+        )}
+      </div>
+    </li>
   );
 };
 

@@ -1,5 +1,5 @@
 import { FormData } from "@/types";
-import ActivitesItem from "./ActivityItem";
+import ActivityWrapper from "./ActivityWrapper";
 
 const activities = [
   {
@@ -25,6 +25,7 @@ type props = FormData & {
 
 const Activities = ({ updateFields, activites, isError }: props) => {
   const toggleActives = (activity: string, parentActivity?: string) => {
+    console.log({ parentActivity, activity });
     let interestedTodo = activites.intersettodo;
     if (parentActivity) {
       const isParentFound = interestedTodo.find(
@@ -38,6 +39,10 @@ const Activities = ({ updateFields, activites, isError }: props) => {
           isParentFound.children = isParentFound.children?.filter(
             (item) => item.label !== activity,
           );
+          if (isParentFound.children.length === 0) {
+            delete isParentFound.label;
+            delete isParentFound.children;
+          }
         } else {
           isParentFound.children.push({ label: activity });
         }
@@ -75,10 +80,11 @@ const Activities = ({ updateFields, activites, isError }: props) => {
         </p>
       )}
       <h2 className="section-title-sm">What do you want to do there?</h2>
-      <ActivitesItem
+
+      <ActivityWrapper
+        activities={activities}
         seletectActivities={activites.intersettodo}
         toggleActives={toggleActives}
-        activities={activities}
       />
 
       <div className="mt-4">
