@@ -82,7 +82,7 @@ export interface DynamicContent {
   setData: any;
 }
 
-export type FormData = {
+export type IFormData = {
   location: {
     name: string;
   };
