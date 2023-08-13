@@ -12,6 +12,7 @@ import StepperBanner from "@/components/StepperBanner";
 import Travel from "@/components/Travel";
 import { useMultistepForm } from "@/hooks/useMultiStepForm";
 import { IFormData } from "@/types";
+import { AnimatePresence } from "framer-motion";
 import { FormEvent, useState } from "react";
 
 const calculateHeight = ({
@@ -220,7 +221,7 @@ const About = () => {
     ]);
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
-    <div className="section bg-[#0e2c23]">
+    <div className="section  bg-[#0e2c23]">
       <div className="container">
         <button
           onClick={onOpen}
@@ -228,101 +229,100 @@ const About = () => {
         >
           Find A Trip Designer
         </button>
-
-        <Modal onClose={onClose}>
-          <form
-            name="contact"
-            data-netlify="true"
-            method="post"
-            className={`max-w-[1000px] p-6 bg-white mx-auto ${
-              isOpen ? "block" : "hidden"
-            }`}
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="testing" value={"testing"} />
-            <StepperBanner onClose={onClose} />
-            <div className="row gx-4">
-              <div
-                style={
-                  {
-                    "--height": calculateHeight({
-                      currentStep: currentStepIndex,
-                      totalSteps: steps.length,
-                    }),
-                  } as React.CSSProperties
-                }
-                className="stepper-steps col-1 md:col-3"
+        <AnimatePresence>
+          {isOpen && (
+            <Modal onClose={onClose}>
+              <form
+                name="trip-plan"
+                data-netlify="true"
+                method="post"
+                className="max-w-[1000px] p-6 bg-white mx-auto"
               >
-                {steps.map((item, i) => (
-                  <Step
-                    key={i}
-                    label={item.label}
-                    step={i}
-                    currentStep={currentStepIndex}
-                  />
-                ))}
-              </div>
-              <div className="md:col-9 col">
-                <div className="h-full flex flex-col">
-                  {currentStepIndex < 0 && <Default />}
-                  {steps.map((item, i) => {
-                    return (
-                      <div
-                        className={currentStepIndex === i ? "block" : "hidden"}
+                <input type="hidden" name="form-name" value="trip-plan" />
+                <StepperBanner onClose={onClose} />
+                <div className="row gx-4">
+                  <div
+                    style={
+                      {
+                        "--height": calculateHeight({
+                          currentStep: currentStepIndex,
+                          totalSteps: steps.length,
+                        }),
+                      } as React.CSSProperties
+                    }
+                    className="stepper-steps col-1 md:col-3"
+                  >
+                    {steps.map((item, i) => (
+                      <Step
                         key={i}
-                      >
-                        {item.component}
-                      </div>
-                    );
-                  })}
-                  <div className="flex justify-between mt-auto">
-                    {!isFirstStep && (
-                      <button
-                        onClick={back}
-                        type="button"
-                        className="btn btn-primary"
-                      >
-                        Prev
-                      </button>
-                    )}
-
-                    <button
-                      type="submit"
-                      className={`btn btn-primary  ${
-                        isLastStep ? "block" : "none"
-                      }`}
-                    >
-                      Finish
-                    </button>
-                    {currentStepIndex < steps.length - 1 && (
-                      <button
-                        onClick={() => {
-                          if (currentStepIndex < 0) {
-                            next();
-                          } else {
-                            if (
-                              !isValidate(
-                                label as keyof FormData,
-                                data as any,
-                                schema,
-                              )
-                            ) {
-                              next();
+                        label={item.label}
+                        step={i}
+                        currentStep={currentStepIndex}
+                      />
+                    ))}
+                  </div>
+                  <div className="md:col-9 col">
+                    <div className="h-full flex flex-col">
+                      {currentStepIndex < 0 && <Default />}
+                      {steps.map((item, i) => {
+                        return (
+                          <div
+                            className={
+                              currentStepIndex === i ? "block" : "hidden"
                             }
-                          }
-                        }}
-                        type={"button"}
-                        className="btn btn-primary ml-auto"
-                      >
-                        Next
-                      </button>
-                    )}
+                            key={i}
+                          >
+                            {item.component}
+                          </div>
+                        );
+                      })}
+                      <div className="flex justify-between mt-auto">
+                        {!isFirstStep && (
+                          <button
+                            onClick={back}
+                            type="button"
+                            className="btn btn-primary"
+                          >
+                            Prev
+                          </button>
+                        )}
+
+                        {isLastStep && (
+                          <button type="submit" className="btn btn-primary">
+                            Finish
+                          </button>
+                        )}
+                        {currentStepIndex < steps.length - 1 && (
+                          <button
+                            onClick={() => {
+                              if (currentStepIndex < 0) {
+                                next();
+                              } else {
+                                if (
+                                  !isValidate(
+                                    label as keyof FormData,
+                                    data as any,
+                                    schema,
+                                  )
+                                ) {
+                                  next();
+                                }
+                              }
+                            }}
+                            type={"button"}
+                            className="btn btn-primary ml-auto"
+                          >
+                            Next
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </form>
-        </Modal>
+              </form>
+            </Modal>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

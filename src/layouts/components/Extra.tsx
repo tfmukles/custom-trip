@@ -29,14 +29,7 @@ const Extra = ({ updateFields, extra, isError }: props) => {
         Optional
       </div>
       {extra.vibe.map((item, i) => {
-        return (
-          <input
-            type="hidden"
-            name={`extra[vibe][${i}]`}
-            value={item}
-            key={i}
-          />
-        );
+        return <input type="hidden" name={`vibe`} value={item} key={i} />;
       })}
       <h2 className="section-title-sm mt-4">What’s your travel vibe?</h2>
       <ul className="w-full flex flex-wrap daropdown">
