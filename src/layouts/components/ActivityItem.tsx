@@ -1,8 +1,13 @@
 "use client";
+import { intersettodo } from "@/types";
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const ActivitesItem = ({
   activities,
+  toggleActives,
+  parentActivity,
+  seletectActivities,
 }: {
   activities: {
     label: string;
@@ -10,6 +15,9 @@ const ActivitesItem = ({
       label: string;
     }[];
   }[];
+  toggleActives: (activity: string, parentActivity?: string) => void;
+  parentActivity?: string;
+  seletectActivities: intersettodo[];
 }) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -33,12 +41,20 @@ const ActivitesItem = ({
         <li key={i}>
           <div role="button" className="r relative">
             <span
+              onClick={() => {
+                activity.children && setOpen(true);
+                toggleActives(activity.label, parentActivity);
+              }}
               ref={buttonRef}
-              className={`text-dark text-sm p-2 m-2 border border-border`}
+              className={`text-dark text-sm p-2 m-2 border border-border ${
+                seletectActivities?.find((item) => item.label == activity.label)
+                  ? "bg-primary text-white"
+                  : ""
+              }`}
             >
               {activity.label}
             </span>
-            {/* {activity.children && (
+            {activity.children && (
               <AnimatePresence>
                 <div
                   ref={rootRef}
@@ -47,14 +63,14 @@ const ActivitesItem = ({
                   }`}
                 >
                   <ActivitesItem
+                    seletectActivities={seletectActivities}
                     activities={activity.children}
-                    selectedActivities={selectedActivities[0]?.children ?? []}
                     toggleActives={toggleActives}
                     parentActivity={activity.label}
                   />
                 </div>
               </AnimatePresence>
-            )} */}
+            )}
           </div>
         </li>
       ))}

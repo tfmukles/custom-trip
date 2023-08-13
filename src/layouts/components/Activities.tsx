@@ -12,6 +12,10 @@ const activities = [
   {
     label: "Local Culture",
   },
+  {
+    label: "Must See Attractions2",
+    children: [{ label: "1" }, { label: "2" }, { label: "3" }],
+  },
 ];
 
 type props = FormData & {
@@ -26,17 +30,16 @@ const Activities = ({ updateFields, activites, isError }: props) => {
       const isParentFound = interestedTodo.find(
         (item) => item.label === parentActivity,
       );
-
       if (isParentFound && isParentFound.children) {
         const isChildrenExit = isParentFound.children.find(
           (item) => item.label === activity,
         );
         if (isChildrenExit) {
-          isChildrenExit.children = isParentFound.children?.filter(
+          isParentFound.children = isParentFound.children?.filter(
             (item) => item.label !== activity,
           );
         } else {
-          isChildrenExit && isChildrenExit.push({ label: activity });
+          isParentFound.children.push({ label: activity });
         }
       } else {
         interestedTodo.push({
@@ -56,6 +59,12 @@ const Activities = ({ updateFields, activites, isError }: props) => {
         interestedTodo.push({ label: activity, children: [] });
       }
     }
+    updateFields({
+      activites: {
+        ...activites,
+        intersettodo: interestedTodo,
+      },
+    });
   };
   return (
     <>
@@ -66,10 +75,27 @@ const Activities = ({ updateFields, activites, isError }: props) => {
         </p>
       )}
       <h2 className="section-title-sm">What do you want to do there?</h2>
-      <ActivitesItem activities={activities} />
+      <ActivitesItem
+        seletectActivities={activites.intersettodo}
+        toggleActives={toggleActives}
+        activities={activities}
+      />
 
       <div className="mt-4">
-        <input type="checkbox" name="considerations" id="considerations" />
+        <input
+          onChange={() =>
+            updateFields({
+              activites: {
+                ...activites,
+                considerations: !activites.considerations,
+              },
+            })
+          }
+          checked={activites.considerations}
+          type="checkbox"
+          name="considerations"
+          id="considerations"
+        />
         <label className="ml-3" htmlFor="considerations">
           Any important considerations we should be aware of?
         </label>

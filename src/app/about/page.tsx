@@ -22,7 +22,9 @@ const calculateHeight = ({
   currentStep: number;
   totalSteps: number;
 }) => {
-  return currentStep === totalSteps ? "100%" : `65px + ${100 * currentStep}px`;
+  return currentStep === totalSteps - 1
+    ? "100%"
+    : `65px + ${100 * currentStep}px`;
 };
 
 const schema = {
@@ -117,7 +119,7 @@ const About = () => {
   ): any => {
     const currentData: any = data[label];
     let currentSchema = schema[label];
-    console.log(currentSchema);
+    // console.log(currentSchema);
 
     const isErrors = Array.from(Object.entries(currentSchema)).map(
       ([key, value]) => {
@@ -126,6 +128,10 @@ const About = () => {
             typeof currentData[key] === "string" &&
             currentData[key].length > 0
           ) {
+            return true;
+          }
+
+          if (typeof currentData[key] === "number" && currentData[key] > 0) {
             return true;
           }
           if (Array.isArray(currentData[key]) && currentData[key].length > 0) {
@@ -139,8 +145,6 @@ const About = () => {
             if (currentData[key] instanceof Date) {
               return true;
             }
-
-            console.log("I am herr");
 
             return false;
           }
@@ -202,6 +206,8 @@ const About = () => {
         ),
       },
     ]);
+
+  console.log(data);
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">

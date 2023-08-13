@@ -104,11 +104,11 @@ export type FormData = {
     considerations: boolean;
   };
   extra: {
-    vibe: [];
+    vibe: string[];
   };
 };
 
-interface intersettodo {
+export interface intersettodo {
   label: string;
   children?: intersettodo[];
 }
