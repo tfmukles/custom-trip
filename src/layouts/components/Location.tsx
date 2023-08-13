@@ -84,7 +84,7 @@ const Location = ({ updateFields, location, isError }: props) => {
               className={`${input && !isOpen ? "text-primary" : ""}`}
               autoComplete={"off"}
               type="text"
-              name="country"
+              name="locaction[country]"
               placeholder={isOpen ? "Try 'Barcelona'" : "Where to go?"}
             />
           </div>

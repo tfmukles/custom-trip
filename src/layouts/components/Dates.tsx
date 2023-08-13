@@ -35,6 +35,8 @@ const Dates = ({ updateFields, dates, isError }: props) => {
     setRender(true);
   }, []);
 
+  const { startDate, endDate } = state[0];
+
   return (
     <>
       {isError && (
@@ -43,6 +45,12 @@ const Dates = ({ updateFields, dates, isError }: props) => {
           you.
         </p>
       )}
+      <input
+        type="hidden"
+        name="dates[startDate]"
+        value={startDate.toString()}
+      />
+      <input type="hidden" name="dates[endDate]" value={endDate.toString()} />
       <h2 className="section-title-sm">When would you like to travel?</h2>
       <DateRangePicker
         onChange={(item: any) => {

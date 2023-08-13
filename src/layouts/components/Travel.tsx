@@ -8,9 +8,16 @@ type props = IFormData & {
 const Travel = ({ updateFields, travelers, isError }: props) => {
   return (
     <>
+      {isError && (
+        <p className="bg-red-300 p-3 rounded mb-5 text-dark">
+          Please complete this field so we can find the best Trip Designers for
+          you.
+        </p>
+      )}
       <h2 className="section-title-sm">
         How many people are going on the trip?
       </h2>
+      <input type="hidden" name="travelers[adults]" value={travelers.adults} />
       <div className="flex space-x-4 items-center">
         <button
           type="button"

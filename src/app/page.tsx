@@ -181,6 +181,11 @@ const About = () => {
   function onSubmitHandler(e: FormEvent) {
     e.preventDefault();
 
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data2 = Object.fromEntries([...formData.entries()]);
+
+    console.log(data2);
+
     let x = getPairs(data)
       .map(
         ([[key0, ...keysRest], value]: any) =>
@@ -191,7 +196,7 @@ const About = () => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", x }),
+      body: encode({ "form-name": "contact", ...x }),
     }).then(() => alert("Success!"));
   }
 
@@ -238,7 +243,6 @@ const About = () => {
         ),
       },
     ]);
-
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">
@@ -255,6 +259,7 @@ const About = () => {
             {isOpen && (
               <Modal onClose={onClose}>
                 <form
+                  name="contact"
                   onSubmit={onSubmitHandler}
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
@@ -282,7 +287,19 @@ const About = () => {
                     </div>
                     <div className="md:col-9 col">
                       <div className="h-full flex flex-col">
-                        {activeComponet ?? <Default />}
+                        {currentStepIndex < 0 && <Default />}
+                        {steps.map((item, i) => {
+                          return (
+                            <div
+                              className={
+                                currentStepIndex === i ? "block" : "hidden"
+                              }
+                              key={i}
+                            >
+                              {item.component}
+                            </div>
+                          );
+                        })}
                         <div className="flex justify-between mt-auto">
                           {!isFirstStep && (
                             <button
@@ -293,27 +310,35 @@ const About = () => {
                               Prev
                             </button>
                           )}
-                          <button
-                            onClick={() => {
-                              if (currentStepIndex < 0) {
-                                next();
-                              } else {
-                                if (
-                                  !isValidate(
-                                    label as keyof FormData,
-                                    data as any,
-                                    schema,
-                                  )
-                                ) {
+
+                          {isLastStep && (
+                            <button type="submit" className="btn btn-primary">
+                              Finish
+                            </button>
+                          )}
+                          {currentStepIndex < steps.length - 1 && (
+                            <button
+                              onClick={() => {
+                                if (currentStepIndex < 0) {
                                   next();
+                                } else {
+                                  if (
+                                    !isValidate(
+                                      label as keyof FormData,
+                                      data as any,
+                                      schema,
+                                    )
+                                  ) {
+                                    next();
+                                  }
                                 }
-                              }
-                            }}
-                            type={isLastStep ? "submit" : "button"}
-                            className="btn btn-primary ml-auto"
-                          >
-                            {isLastStep ? "Finish" : "Next"}
-                          </button>
+                              }}
+                              type={"button"}
+                              className="btn btn-primary ml-auto"
+                            >
+                              Next
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>

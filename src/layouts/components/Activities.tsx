@@ -1,4 +1,5 @@
 import { IFormData } from "@/types";
+import ActivitiesValues from "./ActivitesValues";
 import ActivityWrapper from "./ActivityWrapper";
 
 const activities = [
@@ -25,7 +26,6 @@ type props = IFormData & {
 
 const Activities = ({ updateFields, activites, isError }: props) => {
   const toggleActives = (activity: string, parentActivity?: string) => {
-    console.log({ parentActivity, activity });
     let interestedTodo = activites.intersettodo;
     if (parentActivity) {
       const isParentFound = interestedTodo.find(
@@ -81,7 +81,7 @@ const Activities = ({ updateFields, activites, isError }: props) => {
         </p>
       )}
       <h2 className="section-title-sm">What do you want to do there?</h2>
-
+      <ActivitiesValues selectedActivites={activites.intersettodo} />
       <ActivityWrapper
         activities={activities}
         seletectActivities={activites.intersettodo}
