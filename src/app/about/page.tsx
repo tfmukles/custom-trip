@@ -116,7 +116,7 @@ let getPairs = (obj: any, keys: any = []) =>
 
 const About = () => {
   const [hasError, setError] = useState(false);
-  const [data, setData] = useState(INITIAL_DATA);
+  const [data, setData] = useState<IFormData>(INITIAL_DATA);
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);
   const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
@@ -301,7 +301,7 @@ const About = () => {
                                 if (
                                   !isValidate(
                                     label as keyof FormData,
-                                    data,
+                                    data as any,
                                     schema,
                                   )
                                 ) {

@@ -1,6 +1,6 @@
-import { FormData } from "@/types";
+import { IFormData } from "@/types";
 
-type props = FormData & {
+type props = IFormData & {
   updateFields: (fields: Partial<any>) => void;
   isError: boolean;
 };

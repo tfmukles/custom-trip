@@ -11,9 +11,9 @@ import Step from "@/components/Step";
 import StepperBanner from "@/components/StepperBanner";
 import Travel from "@/components/Travel";
 import { useMultistepForm } from "@/hooks/useMultiStepForm";
-import { FormData } from "@/types";
+import { IFormData } from "@/types";
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const calculateHeight = ({
   currentStep,
@@ -72,7 +72,7 @@ const schema = {
   },
 };
 
-const INITIAL_DATA: FormData = {
+const INITIAL_DATA: IFormData = {
   location: {
     name: "",
   },
@@ -100,9 +100,23 @@ const INITIAL_DATA: FormData = {
 
 type keys = keyof FormData;
 
+const encode = (data: any) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
+let getPairs = (obj: any, keys: any = []) =>
+  Object.entries(obj).reduce((pairs: any, [key, value]) => {
+    if (typeof value === "object")
+      pairs.push(...getPairs(value, [...keys, key]));
+    else pairs.push([[...keys, key], value]);
+    return pairs;
+  }, []);
+
 const About = () => {
   const [hasError, setError] = useState(false);
-  const [data, setData] = useState(INITIAL_DATA);
+  const [data, setData] = useState<IFormData>(INITIAL_DATA);
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);
   const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
@@ -163,6 +177,24 @@ const About = () => {
       return { ...prev, ...fields };
     });
   }
+
+  function onSubmitHandler(e: FormEvent) {
+    e.preventDefault();
+
+    let x = getPairs(data)
+      .map(
+        ([[key0, ...keysRest], value]: any) =>
+          `${key0}${keysRest.map((a: any) => `[${a}]`).join("")}=${value}`,
+      )
+      .join("&");
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", x }),
+    }).then(() => alert("Success!"));
+  }
+
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       {
@@ -207,7 +239,6 @@ const About = () => {
       },
     ]);
 
-  console.log(data);
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">
@@ -224,13 +255,9 @@ const About = () => {
             {isOpen && (
               <Modal onClose={onClose}>
                 <form
-                  name="contact"
-                  action="/pages/success"
-                  method="POST"
-                  data-netlify="true"
+                  onSubmit={onSubmitHandler}
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
-                  <input type="hidden" name="contact" value="name_of_my_form" />
                   <StepperBanner onClose={onClose} />
                   <div className="row gx-4">
                     <div
@@ -274,7 +301,7 @@ const About = () => {
                                 if (
                                   !isValidate(
                                     label as keyof FormData,
-                                    data,
+                                    data as any,
                                     schema,
                                   )
                                 ) {
@@ -282,7 +309,7 @@ const About = () => {
                                 }
                               }
                             }}
-                            type={"button"}
+                            type={isLastStep ? "submit" : "button"}
                             className="btn btn-primary ml-auto"
                           >
                             {isLastStep ? "Finish" : "Next"}

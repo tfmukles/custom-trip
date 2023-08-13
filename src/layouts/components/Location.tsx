@@ -1,5 +1,5 @@
 import DynamicIcon from "@/helpers/DynamicIcon";
-import { FormData } from "@/types";
+import { IFormData } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ const getCitites = async () => {
   return data;
 };
 
-type props = FormData & {
+type props = IFormData & {
   updateFields: (fields: Partial<any>) => void;
   isError: boolean;
 };

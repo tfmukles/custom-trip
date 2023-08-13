@@ -1,4 +1,4 @@
-import { FormData } from "@/types";
+import { IFormData } from "@/types";
 import ActivityWrapper from "./ActivityWrapper";
 
 const activities = [
@@ -18,7 +18,7 @@ const activities = [
   },
 ];
 
-type props = FormData & {
+type props = IFormData & {
   updateFields: (fields: Partial<any>) => void;
   isError: boolean;
 };
