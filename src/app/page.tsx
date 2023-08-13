@@ -235,12 +235,12 @@ const About = () => {
             {isOpen && (
               <Modal onClose={onClose}>
                 <form
-                  name="contact"
+                  name="trip-plan"
                   data-netlify="true"
                   method="post"
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
-                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="form-name" value="trip-plan" />
                   <StepperBanner onClose={onClose} />
                   <div className="row gx-4">
                     <div

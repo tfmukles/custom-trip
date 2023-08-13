@@ -100,20 +100,6 @@ const INITIAL_DATA: IFormData = {
 
 type keys = keyof FormData;
 
-const encode = (data: any) => {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-};
-
-let getPairs = (obj: any, keys: any = []) =>
-  Object.entries(obj).reduce((pairs: any, [key, value]) => {
-    if (typeof value === "object")
-      pairs.push(...getPairs(value, [...keys, key]));
-    else pairs.push([[...keys, key], value]);
-    return pairs;
-  }, []);
-
 const About = () => {
   const [hasError, setError] = useState(false);
   const [data, setData] = useState<IFormData>(INITIAL_DATA);
@@ -181,17 +167,12 @@ const About = () => {
   function onSubmitHandler(e: FormEvent) {
     e.preventDefault();
 
-    let x = getPairs(data)
-      .map(
-        ([[key0, ...keysRest], value]: any) =>
-          `${key0}${keysRest.map((a: any) => `[${a}]`).join("")}=${value}`,
-      )
-      .join("&");
+    const formData = new FormData(e.target as HTMLFormElement);
 
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", x }),
+      body: new URLSearchParams(formData as any).toString(),
     }).then(() => alert("Success!"));
   }
 
@@ -238,7 +219,6 @@ const About = () => {
         ),
       },
     ]);
-
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">
@@ -256,8 +236,12 @@ const About = () => {
               <Modal onClose={onClose}>
                 <form
                   onSubmit={onSubmitHandler}
+                  name="trip"
+                  data-netlify="true"
+                  method="post"
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
+                  <input type="hidden" name="form-name" value="trip" />
                   <StepperBanner onClose={onClose} />
                   <div className="row gx-4">
                     <div
@@ -282,7 +266,19 @@ const About = () => {
                     </div>
                     <div className="md:col-9 col">
                       <div className="h-full flex flex-col">
-                        {activeComponet ?? <Default />}
+                        {currentStepIndex < 0 && <Default />}
+                        {steps.map((item, i) => {
+                          return (
+                            <div
+                              className={
+                                currentStepIndex === i ? "block" : "hidden"
+                              }
+                              key={i}
+                            >
+                              {item.component}
+                            </div>
+                          );
+                        })}
                         <div className="flex justify-between mt-auto">
                           {!isFirstStep && (
                             <button
@@ -293,27 +289,35 @@ const About = () => {
                               Prev
                             </button>
                           )}
-                          <button
-                            onClick={() => {
-                              if (currentStepIndex < 0) {
-                                next();
-                              } else {
-                                if (
-                                  !isValidate(
-                                    label as keyof FormData,
-                                    data as any,
-                                    schema,
-                                  )
-                                ) {
+
+                          {isLastStep && (
+                            <button type="submit" className="btn btn-primary">
+                              Finish
+                            </button>
+                          )}
+                          {currentStepIndex < steps.length - 1 && (
+                            <button
+                              onClick={() => {
+                                if (currentStepIndex < 0) {
                                   next();
+                                } else {
+                                  if (
+                                    !isValidate(
+                                      label as keyof FormData,
+                                      data as any,
+                                      schema,
+                                    )
+                                  ) {
+                                    next();
+                                  }
                                 }
-                              }
-                            }}
-                            type={isLastStep ? "submit" : "button"}
-                            className="btn btn-primary ml-auto"
-                          >
-                            {isLastStep ? "Finish" : "Next"}
-                          </button>
+                              }}
+                              type={"button"}
+                              className="btn btn-primary ml-auto"
+                            >
+                              Next
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>
