@@ -46,12 +46,22 @@ const ActivitesItem = ({
           }}
           ref={buttonRef}
           className={`text-dark text-sm p-2 m-2 border border-border ${
-            seletectActivities.find((item) => item.label === activity.label)
+            seletectActivities?.find((item) => item.label === activity.label)
               ? "bg-primary text-white"
               : ""
           }`}
         >
           {activity?.label}
+          {activity.children && (
+            <>
+              {" "}
+              {
+                seletectActivities?.find(
+                  (item) => item.label === activity.label,
+                )?.children?.length
+              }
+            </>
+          )}
         </span>
         {activity.children && (
           <AnimatePresence>
@@ -64,7 +74,7 @@ const ActivitesItem = ({
               <ActivityWrapper
                 activities={activity.children}
                 seletectActivities={
-                  seletectActivities.find(
+                  seletectActivities?.find(
                     (item) => item.label === activity.label,
                   )?.children || []
                 }

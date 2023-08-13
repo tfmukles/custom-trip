@@ -17,7 +17,7 @@ const Extra = ({ updateFields, extra, isError }: props) => {
       yourVibes.push(activity);
     }
     updateFields({
-      activites: {
+      extra: {
         ...extra,
         vibe: yourVibes,
       },

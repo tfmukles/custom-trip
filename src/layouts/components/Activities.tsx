@@ -40,6 +40,7 @@ const Activities = ({ updateFields, activites, isError }: props) => {
             (item) => item.label !== activity,
           );
           if (isParentFound.children.length === 0) {
+            //@ts-ignore
             delete isParentFound.label;
             delete isParentFound.children;
           }
