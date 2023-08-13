@@ -196,7 +196,7 @@ const About = () => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...x }),
+      body: new URLSearchParams(formData as any).toString(),
     }).then(() => alert("Success!"));
   }
 
@@ -259,10 +259,12 @@ const About = () => {
             {isOpen && (
               <Modal onClose={onClose}>
                 <form
+                  data-netlify="true"
                   name="contact"
                   onSubmit={onSubmitHandler}
                   className="max-w-[1000px] p-6 bg-white mx-auto"
                 >
+                  <input type="hidden" name="form-name" value="contact" />
                   <StepperBanner onClose={onClose} />
                   <div className="row gx-4">
                     <div
