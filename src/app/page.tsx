@@ -263,7 +263,7 @@ const About = () => {
             >
               <input type="hidden" name="form-name" value="trip_plan" />
               <StepperBanner onClose={onClose} />
-              <div className="row gx-4">
+              <div className="row gx-4 align-baseline">
                 <div
                   style={
                     {
