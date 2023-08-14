@@ -219,6 +219,7 @@ const About = () => {
         ),
       },
     ]);
+
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">
@@ -233,6 +234,7 @@ const About = () => {
           {isOpen && (
             <Modal onClose={onClose}>
               <form
+                onSubmit={onSubmitHandler}
                 name="contact"
                 data-netlify="true"
                 method="post"
