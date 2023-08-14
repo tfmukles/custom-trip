@@ -237,7 +237,7 @@ const About = () => {
                 onSubmit={onSubmitHandler}
                 name="contact"
                 data-netlify="true"
-                method="post"
+                method="POST"
                 className="max-w-[1000px] p-6 bg-white mx-auto"
               >
                 <input type="hidden" name="form-name" value="contact" />
