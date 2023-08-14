@@ -231,12 +231,12 @@ const About = () => {
           <Modal onClose={onClose}>
             <form
               onSubmit={onSubmitHandler}
-              name="contact"
+              name="trip_plan"
               data-netlify="true"
               method="POST"
               className="max-w-[1000px] p-6 bg-white mx-auto"
             >
-              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="form-name" value="trip_plan" />
               <StepperBanner onClose={onClose} />
               <div className="row gx-4">
                 <div
