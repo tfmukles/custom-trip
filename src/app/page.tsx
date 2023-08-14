@@ -277,7 +277,7 @@ const About = () => {
                         );
                       })}
                       <div className="flex justify-between mt-auto">
-                        {!isFirstStep && (
+                        {currentStepIndex >= 1 && (
                           <button
                             onClick={back}
                             type="button"

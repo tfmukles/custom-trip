@@ -44,7 +44,7 @@ const Travel = ({ updateFields, travelers, isError }: props) => {
       <h2 className="section-title-sm">
         How many people are going on the trip?
       </h2>
-      <input type="hidden" name="travelers[adults]" value={travelers.adults} />
+      <input type="hidden" name="adults" value={travelers.adults} />
       <div className="flex space-x-4 items-center">
         <button
           type="button"

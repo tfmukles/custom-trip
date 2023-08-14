@@ -7,14 +7,7 @@ const ActivitiesValues = ({
 }) => {
   return selectedActivites.map((item, index) => (
     <>
-      <input
-        key={index}
-        type="hidden"
-        name={`activites[${index}].label`}
-        value={item.label}
-      />
-
-      {item.children && <ActivitiesValues selectedActivites={item.children} />}
+      <input key={index} type="hidden" name={`activites`} value={item.label} />
     </>
   ));
 };

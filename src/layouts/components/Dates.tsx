@@ -45,8 +45,16 @@ const Dates = ({ updateFields, dates, isError }: props) => {
           you.
         </p>
       )}
-      <input type="hidden" name="startDate" value={startDate.toString()} />
-      <input type="hidden" name="endDate" value={endDate.toString()} />
+      <input
+        type="hidden"
+        name="startDate"
+        value={startDate.toLocaleDateString()}
+      />
+      <input
+        type="hidden"
+        name="endDate"
+        value={endDate.toLocaleDateString()}
+      />
       <h2 className="section-title-sm">When would you like to travel?</h2>
       <DateRangePicker
         onChange={(item: any) => {

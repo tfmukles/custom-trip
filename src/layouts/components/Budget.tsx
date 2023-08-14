@@ -30,7 +30,7 @@ const Budget = ({ updateFields, budget, isError }: props) => {
         <div className="">
           <label className="block mb-3">From</label>
           <select
-            name="budget[form]"
+            name="form"
             value={budget.form}
             onChange={(e) =>
               updateFields({
@@ -48,7 +48,7 @@ const Budget = ({ updateFields, budget, isError }: props) => {
         <div className="">
           <label className="block mb-3">To</label>
           <select
-            name="budget[to]"
+            name="to"
             value={budget.to}
             onChange={(e) =>
               updateFields({
