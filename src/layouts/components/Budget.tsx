@@ -5,7 +5,21 @@ type props = IFormData & {
   isError: boolean;
 };
 
-const Budget = ({ updateFields, budget, isError }: props) => {
+const CHILD = 100;
+const ADULTS = 300;
+
+const Budget = ({
+  updateFields,
+  budget,
+  dates,
+  isError,
+  location,
+  travelers,
+}: props) => {
+  const startDate: any = new Date(dates.startDate);
+  const endDate: any = new Date(dates.endDate);
+  const timeDifference = (endDate - startDate) / (1000 * 60 * 60 * 24);
+
   return (
     <>
       {isError && (
@@ -23,7 +37,15 @@ const Budget = ({ updateFields, budget, isError }: props) => {
       </p>
       <p className="section-desc">
         <b className="text-base">
-          Average budget for 7 travelers for 18 days in Costa Rica: $20,000+
+          Average budget for{" "}
+          <span className="text-dark">
+            {parseInt(travelers.adults) + parseInt(travelers.children)}
+          </span>{" "}
+          travelers for {timeDifference} days in {location.name}: $
+          {timeDifference *
+            (parseInt(travelers.adults) * ADULTS +
+              parseInt(travelers.children) * CHILD)}
+          +
         </b>
       </p>
       <div className="flex space-x-4 items-center">
@@ -43,6 +65,10 @@ const Budget = ({ updateFields, budget, isError }: props) => {
           >
             <option value={""}>From</option>
             <option value={"1000"}>$1000</option>
+            <option value={"2000"}>$2000</option>
+            <option value={"3000"}>$3000</option>
+            <option value={"4000"}>$4000</option>
+            <option value={"5000"}>$5000</option>
           </select>
         </div>
         <div className="">
@@ -61,6 +87,10 @@ const Budget = ({ updateFields, budget, isError }: props) => {
           >
             <option value={""}>To</option>
             <option value={"1000"}>$1000</option>
+            <option value={"2000"}>$2000</option>
+            <option value={"3000"}>$3000</option>
+            <option value={"4000"}>$4000</option>
+            <option value={"5000"}>$5000</option>
           </select>
         </div>
       </div>

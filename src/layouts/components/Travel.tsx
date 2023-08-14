@@ -7,31 +7,25 @@ type props = IFormData & {
 
 const Travel = ({ updateFields, travelers, isError }: props) => {
   const onAgesChange = (e: React.ChangeEvent<HTMLInputElement>, node: any) => {
-    Object.entries(travelers.ages).forEach(([key, value]) => {
-      if (key === node) {
-        updateFields({
-          travelers: {
-            ...travelers,
-            ages: {
-              ...travelers.ages,
-              [node]: {
-                [e.target.name]: e.target.value,
-              },
-            },
+    const value = parseInt(e.target.value);
+    const element = e.target;
+
+    if (value > 0 && value < 18) {
+      updateFields({
+        travelers: {
+          ...travelers,
+          ages: {
+            ...travelers.ages,
+            [`child-${node + 1}`]: value,
           },
-        });
-      } else {
-        updateFields({
-          travelers: {
-            ...travelers,
-            ages: {
-              ...travelers.ages,
-              [key]: value,
-            },
-          },
-        });
-      }
-    });
+        },
+      });
+      element.nextElementSibling?.classList.remove("block");
+      element.nextElementSibling?.classList.add("hidden");
+      return;
+    }
+    element.nextElementSibling?.classList.remove("hidden");
+    element.nextElementSibling?.classList.add("block");
   };
   return (
     <>
@@ -112,19 +106,21 @@ const Travel = ({ updateFields, travelers, isError }: props) => {
       </div>
 
       <div className="w-full h-0.5 bg-theme-light mt-10" />
-      {[...Array(parseInt(travelers.children)).keys()].map((i) => {
+      <input type="hidden" name="ages" />
+      {[...Array(parseInt(travelers.children))].map((_, i) => {
         return (
           <div className="mt-5" key={i}>
             <p className="text-sm text-dark mb-3">Children {i + 1} age</p>
             <input
-              name={`travelers[ages][${i}]`}
+              onChange={(e) => onAgesChange(e, i)}
+              name={"ages"}
               type="number"
               className="p-3"
               placeholder="0-17"
-              value={travelers.ages[i] || 0}
+              value={(travelers.ages as any)[`child-${i + 1}`] || 0}
             />
             <small className="hidden text-red-500 mt-2">
-              Enter children age.
+              child ages must be between 0 and 17
             </small>
           </div>
         );

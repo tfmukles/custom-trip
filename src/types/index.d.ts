@@ -93,7 +93,7 @@ export type IFormData = {
   travelers: {
     adults: string;
     children: string;
-    ages: [];
+    ages: {};
   };
   budget: {
     form: string;

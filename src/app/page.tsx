@@ -82,7 +82,7 @@ const INITIAL_DATA: IFormData = {
   travelers: {
     adults: "1",
     children: "0",
-    ages: [],
+    ages: {},
   },
   budget: {
     form: "",
@@ -102,20 +102,25 @@ const About = () => {
   const [data, setData] = useState<IFormData>(INITIAL_DATA);
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);
+
   const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     const target = e.target as HTMLElement;
-    if (!target.closest(".modal-body")) {
+    if (target.closest(".btn-close")) {
+      setData(INITIAL_DATA);
+    }
+    if (!target.closest(".modal-body") || target.closest(".btn-close")) {
       setOpen(false);
     }
   };
 
   const isValidate = (
-    label: keyof FormData,
-    data: FormData,
+    label: keyof IFormData,
+    data: IFormData,
     schema: any,
   ): any => {
     const currentData: any = data[label];
     let currentSchema = schema[label];
+
     const isErrors = Array.from(Object.entries(currentSchema)).map(
       ([key, value]) => {
         if ((value as any)?.require === true) {
@@ -125,14 +130,12 @@ const About = () => {
           ) {
             return true;
           }
-
           if (typeof currentData[key] === "number" && currentData[key] > 0) {
             return true;
           }
           if (Array.isArray(currentData[key]) && currentData[key].length > 0) {
             return true;
           }
-
           if (
             typeof currentData[key] === "object" &&
             Object.keys(currentData[key] as any).length === 0
@@ -150,6 +153,23 @@ const About = () => {
       },
     );
 
+    const ages: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      "input[name='ages']:not([type='hidden'])",
+    );
+
+    if (label === "travelers") {
+      ages?.forEach((age) => {
+        const value = parseInt(age.value);
+        if (!(value > 0 && value < 18)) {
+          isErrors.push(false);
+          age.nextElementSibling?.classList.remove("hidden");
+          age.nextElementSibling?.classList.add("block");
+        }
+      });
+    }
+
+    console.log({ isErrors });
+
     setError(isErrors.includes(false));
     return isErrors.includes(false);
   };
@@ -162,14 +182,18 @@ const About = () => {
 
   function onSubmitHandler(e: FormEvent) {
     e.preventDefault();
-
     const formData = new FormData(e.target as HTMLFormElement);
 
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData as any).toString(),
-    }).then(() => alert("Success!"));
+    })
+      .then(() => {
+        setOpen(false);
+        setData(INITIAL_DATA);
+      })
+      .then(() => alert("Success!"));
   }
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
@@ -215,6 +239,8 @@ const About = () => {
         ),
       },
     ]);
+
+  console.log({ data });
 
   const { component: activeComponet, label } = steps[currentStepIndex] || {};
   return (
@@ -297,7 +323,7 @@ const About = () => {
                             } else {
                               if (
                                 !isValidate(
-                                  label as keyof FormData,
+                                  label as keyof IFormData,
                                   data as any,
                                   schema,
                                 )
