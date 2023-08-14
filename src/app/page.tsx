@@ -98,8 +98,6 @@ const INITIAL_DATA: IFormData = {
   },
 };
 
-type keys = keyof FormData;
-
 const About = () => {
   const [hasError, setError] = useState(false);
   const [data, setData] = useState<IFormData>(INITIAL_DATA);
