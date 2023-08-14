@@ -116,8 +116,6 @@ const About = () => {
   ): any => {
     const currentData: any = data[label];
     let currentSchema = schema[label];
-    // console.log(currentSchema);
-
     const isErrors = Array.from(Object.entries(currentSchema)).map(
       ([key, value]) => {
         if ((value as any)?.require === true) {
@@ -151,6 +149,7 @@ const About = () => {
         return true;
       },
     );
+
     setError(isErrors.includes(false));
     return isErrors.includes(false);
   };

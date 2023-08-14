@@ -28,6 +28,7 @@ const Extra = ({ updateFields, extra, isError }: props) => {
       <div className="inline max-w-[98px] text-center text-white font-medium flex-none bg-yellow-500 rounded p-1">
         Optional
       </div>
+      <input type="hidden" name="vibe" />
       {extra.vibe.map((item, i) => {
         return <input type="hidden" name={`vibe`} value={item} key={i} />;
       })}

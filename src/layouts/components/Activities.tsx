@@ -81,6 +81,7 @@ const Activities = ({ updateFields, activites, isError }: props) => {
         </p>
       )}
       <h2 className="section-title-sm">What do you want to do there?</h2>
+      <input type="hidden" name="activites" />
       <ActivitiesValues selectedActivites={activites.intersettodo} />
       <ActivityWrapper
         activities={activities}
