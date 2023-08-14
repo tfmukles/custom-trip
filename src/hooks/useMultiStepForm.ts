@@ -19,6 +19,9 @@ export function useMultistepForm(
     });
   }
 
+  function reset() {
+    setCurrentStepIndex(-1);
+  }
   function goTo(index: number) {
     setCurrentStepIndex(index);
   }
@@ -32,5 +35,6 @@ export function useMultistepForm(
     goTo,
     next,
     back,
+    reset,
   };
 }

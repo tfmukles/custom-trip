@@ -103,16 +103,6 @@ const About = () => {
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);
 
-  const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
-    const target = e.target as HTMLElement;
-    if (target.closest(".btn-close")) {
-      setData(INITIAL_DATA);
-    }
-    if (!target.closest(".modal-body") || target.closest(".btn-close")) {
-      setOpen(false);
-    }
-  };
-
   const isValidate = (
     label: keyof IFormData,
     data: IFormData,
@@ -183,7 +173,6 @@ const About = () => {
   function onSubmitHandler(e: FormEvent) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -196,53 +185,66 @@ const About = () => {
       .then(() => alert("Success!"));
   }
 
-  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-    useMultistepForm([
-      {
-        label: "location",
-        component: (
-          <Location isError={hasError} {...data} updateFields={updateFields} />
-        ),
-      },
-      {
-        label: "dates",
-        component: (
-          <Dates isError={hasError} {...data} updateFields={updateFields} />
-        ),
-      },
-      {
-        label: "travelers",
-        component: (
-          <Travel isError={hasError} {...data} updateFields={updateFields} />
-        ),
-      },
-      {
-        label: "budget",
-        component: (
-          <Budget isError={hasError} {...data} updateFields={updateFields} />
-        ),
-      },
-      {
-        label: "activites",
-        component: (
-          <Activities
-            isError={hasError}
-            {...data}
-            updateFields={updateFields}
-          />
-        ),
-      },
-      {
-        label: "extra",
-        component: (
-          <Extra isError={hasError} {...data} updateFields={updateFields} />
-        ),
-      },
-    ]);
+  const {
+    steps,
+    currentStepIndex,
+    step,
+    isFirstStep,
+    reset,
+    isLastStep,
+    back,
+    next,
+  } = useMultistepForm([
+    {
+      label: "location",
+      component: (
+        <Location isError={hasError} {...data} updateFields={updateFields} />
+      ),
+    },
+    {
+      label: "dates",
+      component: (
+        <Dates isError={hasError} {...data} updateFields={updateFields} />
+      ),
+    },
+    {
+      label: "travelers",
+      component: (
+        <Travel isError={hasError} {...data} updateFields={updateFields} />
+      ),
+    },
+    {
+      label: "budget",
+      component: (
+        <Budget isError={hasError} {...data} updateFields={updateFields} />
+      ),
+    },
+    {
+      label: "activites",
+      component: (
+        <Activities isError={hasError} {...data} updateFields={updateFields} />
+      ),
+    },
+    {
+      label: "extra",
+      component: (
+        <Extra isError={hasError} {...data} updateFields={updateFields} />
+      ),
+    },
+  ]);
 
-  console.log({ data });
+  const onClose = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    const target = e.target as HTMLElement;
+    if (target.closest(".btn-close")) {
+      setData(INITIAL_DATA);
+      reset();
+    }
+    if (!target.closest(".modal-body") || target.closest(".btn-close")) {
+      setOpen(false);
+    }
+  };
 
-  const { component: activeComponet, label } = steps[currentStepIndex] || {};
+  const { label } = steps[currentStepIndex] || {};
   return (
     <div className="section  bg-[#0e2c23]">
       <div className="container">
