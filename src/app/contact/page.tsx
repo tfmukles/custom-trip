@@ -2,13 +2,25 @@
 
 const Contact = () => {
 
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data as any).toString(),
+    })
+      .then(() => console.log("Form successfully submitted"))
+      .catch((error) => alert(error));
+  };
+
   return (
     <>
       <section className="section-sm">
         <div className="container">
           <div className="row">
             <div className="col-10 mx-auto">
-            <form name="contact" action="/" method="POST" data-netlify="true">
+            <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit}>
               <p>
                 <label htmlFor="yourname">
                   Your Name:
