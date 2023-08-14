@@ -8,7 +8,7 @@ const Contact = () => {
         <div className="container">
           <div className="row">
             <div className="col-10 mx-auto">
-            <form name="contact" method="POST" data-netlify="true">
+            <form name="contact" action="/" method="POST" data-netlify="true">
               <p>
                 <label htmlFor="yourname">
                   Your Name:
