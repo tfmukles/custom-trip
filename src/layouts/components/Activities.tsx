@@ -5,7 +5,6 @@ import ActivityWrapper from "./ActivityWrapper";
 const activities = [
   {
     label: "Must See Attractions",
-    children: [{ label: "1" }, { label: "2" }, { label: "3" }],
   },
   {
     label: "Beach",
@@ -14,8 +13,15 @@ const activities = [
     label: "Local Culture",
   },
   {
-    label: "Must See Attractions2",
-    children: [{ label: "1" }, { label: "2" }, { label: "3" }],
+    label: "Outdoor",
+    children: [
+      {
+        label: "Animal encounters",
+      },
+      {
+        label: "Hiking",
+      },
+    ],
   },
 ];
 

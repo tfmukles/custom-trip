@@ -1,4 +1,5 @@
 "use client";
+import DynamicIcon from "@/helpers/DynamicIcon";
 import { intersettodo } from "@/types";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -55,6 +56,7 @@ const ActivitesItem = ({
           {activity.children && (
             <>
               {" "}
+              <DynamicIcon icon="FaAngleDown" className="inline-block" />{" "}
               {
                 seletectActivities?.find(
                   (item) => item.label === activity.label,
