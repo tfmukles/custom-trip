@@ -60,6 +60,7 @@ const Dates = ({ updateFields, dates, isError }: props) => {
         onChange={(item: any) => {
           setState([item.selection]);
         }}
+        minDate={new Date()}
         months={2}
         ranges={state}
         direction="horizontal"
