@@ -1,5 +1,5 @@
 ---
-title: "Mokles Hossen 001"
+title: "Mokles Hossen"
 meta_title: "Meta title expressionfd fs fd fadsf asdf"
 description: "this is meta description"
 image: "/images/image-placeholder.png"
