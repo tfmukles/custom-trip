@@ -1,20 +1,18 @@
 ---
-title: "title"
-meta_title: "meta title"
-description: "description"
+title: ""
+meta_title: ""
+description: "this is meta description"
 image: "/images/image-placeholder.png"
-categories:
-  - "Technology sadfasdf"
-  - "Data asdfdsa"
-author: "a sdfasd Sam Wilson"
+categories: "Architecture"
+author: "John Doe"
 tags:
-  - "technology fasdf"
-  - "tailwind asdfas f"
+  - "silicon"
+  - "technology"
 draft: false
 ---
 
 Nemo vel ad consectetur namut rutrum ex, venenatis sollicitudin urna. Aliquam erat volutpat. Integer eu ipsum sem. Ut bibendum lacus vestibulum maximus suscipit. Quisque vitae nibh iaculis neque blandit euismod.
- fdsf asdf asdf asd
+
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo vel ad consectetur ut aperiam. Itaque eligendi natus aperiam? Excepturi repellendus consequatur quibusdam optio expedita praesentium est adipisci dolorem ut eius!
 
 ## Creative Design
