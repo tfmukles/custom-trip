@@ -1,7 +1,7 @@
 ---
-title: "it's title brother adsfdasfasd f"
-meta_title: "It's meta title"
-description: "this is description."
+title: "title"
+meta_title: "meta title"
+description: "description"
 image: "/images/image-placeholder.png"
 categories:
   - "Technology sadfasdf"
