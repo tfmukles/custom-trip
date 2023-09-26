@@ -1,5 +1,5 @@
 ---
-title: "Hey you listen to me."
+title: "post number 3"
 meta_title: ""
 description: "this is meta description"
 image: "/images/image-placeholder.png"
