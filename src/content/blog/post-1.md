@@ -1,10 +1,10 @@
 ---
-title: ""
+title: "My title"
 meta_title: ""
 description: ""
-image: ""
+image: "/images/404.png"
 categories: ""
 author: ""
-tags:
+tags: ""
 draft: true
 ---
