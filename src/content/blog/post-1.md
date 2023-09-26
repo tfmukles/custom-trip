@@ -1,6 +1,6 @@
 ---
 title: "How to build an Application with modern Technology."
-meta_title: "Meta title"
+meta_title: "Meta title asdfasf"
 description: "this is meta description"
 image: "/images/image-placeholder.png"
 categories:
