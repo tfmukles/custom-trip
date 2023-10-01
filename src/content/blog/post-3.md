@@ -2,7 +2,7 @@
 title: ""
 meta_title: ""
 description: ""
-image: undefined
+image: ""
 categories: ""
 author: ""
 tags:
