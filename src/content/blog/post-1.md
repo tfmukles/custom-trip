@@ -5,6 +5,9 @@ description: ""
 image: ""
 categories: ""
 author: ""
-tags: []
+tags: 
+  - "New Value"
+  - "New Value"
+  - "New Value"
 draft: true
 ---
