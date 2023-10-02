@@ -6,7 +6,6 @@ image: ""
 categories: ""
 author: ""
 tags: 
-  - "Mokles hossen"
   - "it's"
   - "New Value"
   - "New Value"
