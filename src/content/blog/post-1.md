@@ -6,8 +6,6 @@ image: ""
 categories: ""
 author: ""
 tags: 
-  - "New Value"
-  - "New Value"
-  - "New Value"
+  - "Mokles hossen"
 draft: true
 ---
