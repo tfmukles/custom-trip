@@ -1,1 +1,1 @@
-{"blog":[{"file":"files/src/content/blog/post-2.md","type":"Document","name":"post","include":"*.md","exclude":"!*index.md"}]}
+{"blog":[{"include":"*.md","exclude":"!*index.md","name":"post-6","type":"List"}]}
