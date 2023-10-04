@@ -1,1 +1,1 @@
-{"blog":[{"include":["*.md"," *.mdx"],"exclude":["!*index.md"],"name":"blog","type":"select type"}]}
+{"blog":[{"include":["*.md"," *.mdx"],"exclude":["!*index.md"],"name":"blog","type":"list"}]}
