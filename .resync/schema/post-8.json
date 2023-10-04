@@ -1,1 +1,1 @@
-[]
+[{"label":"title","type":"string"},{"label":"meta_title","type":"string"},{"label":"description","type":"string"},{"label":"image","type":"string"},{"label":"categories","type":"string"},{"label":"author","type":"string"},{"label":"tags0","type":"string"},{"label":"tags1","type":"string"},{"label":"tags2","type":"string"},{"label":"draft","type":"boolean"}]
