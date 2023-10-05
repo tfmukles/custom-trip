@@ -1,1 +1,0 @@
-{"authors":[{"include":["*.md"],"exclude":["!*index.md"],"name":"author","type":"list"}]}
