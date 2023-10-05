@@ -1,1 +1,1 @@
-{"0":{"label":"title","type":"string"},"1":{"label":"meta_title","type":"string"},"2":{"label":"description","type":"string"},"3":{"label":"date","type":"object"},"4":{"label":"image","type":"media"},"5":{"label":"categories","type":"Array"},"6":{"label":"author","type":"string"},"7":{"label":"tags","type":"Array"},"8":{"label":"draft","type":"boolean"},"":[{"include":["*.md"],"exclude":["!*index.md"],"name":"post","type":"list"}]}
+{"blog":[{"include":["*.md"],"exclude":["!*index.md"],"name":"post","type":"list"}]}
