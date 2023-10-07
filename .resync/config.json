@@ -1,1 +1,12 @@
-{"environment":"nextjs","media":{"root":"/images/public","public":"images/root"},"blog":[{"include":["*.md"],"exclude":["!*index.md"],"name":"post","type":"list"}]}
+{
+  "environment": "nextjs",
+  "media": { "root": "src/content", "public": "public/images" },
+  "blog": [
+    {
+      "include": ["*.md"],
+      "exclude": ["!*index.md"],
+      "name": "post",
+      "type": "list"
+    }
+  ]
+}
