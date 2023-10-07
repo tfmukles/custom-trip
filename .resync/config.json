@@ -1,1 +1,4 @@
-{"environment":"hugo","media.root":"public/images","media.public":"","media":{"environment":"nextjs","root":"/images/public","public":""}}
+{
+  "environment": "hugo",
+  "media": { "environment": "nextjs", "root": "/images/public", "public": "" }
+}
