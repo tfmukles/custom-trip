@@ -1,1 +1,0 @@
-[{"label":"title","type":"string"},{"label":"meta_title","type":"string"},{"label":"description","type":"string"},{"label":"image","type":"string"},{"label":"categories","type":"string"},{"label":"author","type":"string"},{"label":"tags","type":"Array"},{"label":"draft","type":"boolean"}]
