@@ -1,11 +1,1 @@
-[
-  { "label": "title", "type": "string" },
-  { "label": "meta_title", "type": "string" },
-  { "label": "description", "type": "string" },
-  { "label": "date", "type": "object" },
-  { "label": "image", "type": "media" },
-  { "label": "categories", "type": "Array" },
-  { "label": "author", "type": "string" },
-  { "label": "tags", "type": "Array" },
-  { "label": "draft", "type": "boolean" }
-]
+[{"label":"title","type":"string"},{"label":"meta_title","type":"string"},{"label":"description","type":"string"},{"label":"date","type":"Date"},{"label":"image","type":"media"},{"label":"categories","type":"Array"},{"label":"author","type":"string"},{"label":"tags","type":"Array"},{"label":"draft","type":"boolean"}]
