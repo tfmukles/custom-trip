@@ -1,0 +1,1 @@
+[{"label":"title","type":"string"},{"label":"email","type":"string"},{"label":"image","type":"media"},{"label":"description","type":"string"},{"label":"social","type":"Array","fields":[{"label":"name","type":"string"},{"label":"icon","type":"string"},{"label":"link","type":"string"}]}]
