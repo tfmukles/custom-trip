@@ -16,4 +16,7 @@ social:
   - name: "Mokles"
     icon: "FaMukles"
     link: "FaLink"
+  - name: "Sumon Ahamed"
+    icon: "FaSumon"
+    link: "https://sumon.com"
 ---
