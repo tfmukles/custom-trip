@@ -16,4 +16,4 @@ social:
   - name: ""
     icon: ""
     link: ""
-  - - ----
+----
