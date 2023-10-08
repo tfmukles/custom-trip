@@ -13,7 +13,10 @@ social:
   - name: "twitter"
     icon: "FaTwitter"
     link: "https://twiter.com"
-  - name: ""
-    icon: ""
-    link: ""
+  - name: "Mokels"
+    icon: "FaMukles"
+    link: "FaLink"
+  - name: "Mokels"
+    icon: "FaIcons"
+    link: "FaLink"
 ---
