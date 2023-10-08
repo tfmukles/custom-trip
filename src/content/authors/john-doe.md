@@ -1,8 +1,8 @@
 ---
-title: "John Doe"
-email: "johndoe@email.com"
+title: "Hey I am Jhon"
+email: "mukles.themefisher@gmail.com"
 image: "/images/avatar.png"
-description: "this is meta description"
+description: "description"
 social: 
   - name: "instagram"
     icon: "FaInstagram"
@@ -13,10 +13,10 @@ social:
   - name: "twitter"
     icon: "FaTwitter"
     link: "https://twiter.com"
-  - name: "Mokels"
+  - name: "Sumon"
     icon: "FaMukles"
     link: "FaLink"
-  - name: "Mokels"
+  - name: "Mukles"
     icon: "FaIcons"
     link: "FaLink"
 ---
