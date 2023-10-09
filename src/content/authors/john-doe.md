@@ -2,7 +2,7 @@
 title: "Hey I am Jhon"
 email: "mukles.themefisher@gmail.com"
 image: "/images/avatar.png"
-description: "description"
+description: "fasdf adsf dasf asdf adsfs"
 social: 
   - name: "instagram"
     icon: "FaInstagram"
