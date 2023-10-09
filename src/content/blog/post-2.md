@@ -2,7 +2,7 @@
 title: "How to build an Application with modern Technology"
 meta_title: ""
 description: "this is meta description"
-date:
+date: null
 image: "/images/image-placeholder.png"
 categories: 
   - "Technology"
