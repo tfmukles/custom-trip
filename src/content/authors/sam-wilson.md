@@ -1,18 +1,51 @@
 ---
-title: "Sam Wilson"
-email: "samwilson@email.com"
-image: "/images/avatar.png"
+title: "Your ‘Surge Capacity’ Is Depleted It’s Why You Feel Awful to The Society"
+image: "/images/blogs/02.jpg"
+date: 2020-03-14T15:40:24+06:00
+author: "Ausie Makquis"
+author_profile: "https://linkedin.com/in/#"
 description: "this is meta description"
-social: 
-  - name: ""
-    icon: ""
-    link: ""
-  - name: "twitter"
-    icon: "FaTwitter"
-    link: "https://twitter.com"
-  - name: "linkedin"
-    icon: "FaLinkedin"
-    link: "https://linkedin.com"
+categories: ["science"]
+draft: false
 ---
 
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+##### Heading 6
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec et ipsum ullamcorper venenatis fringilla.
+Pretium, purus eu nec vulputate vel habitant egestas. Congue ornare at ipsum, viverra. Vitae magna faucibus
+eros, lectus sociis. Etiam nunc amet id dignissim. Feugiat id tempor vel sit in ornare turpis posuere. Eu
+quisque integer non rhoncus elementum vel. Quis nec viverra lectus augue nec praesent
+
+Laoreet mauris odio ut nec. Nisl, sed adipiscing dignissim arcu placerat ornare pharetra nec
+in. Ultrices in nisl potenti vitae tempus. Auctor consectetur luctus eu in amet sagittis. Dis urna, vel
+hendrerit convallis Senectus feugiat faucibus commodo egestas leo vitae in morbi. Enim arcu dignissim
+mauris,
+eu, eget
+
+pharetra odio amet pellentesque. Egestas nisi adipiscing sed in lectus. Vitae ultrices malesuada aliquet
+Faucibus consectetur tempus adipiscing vitae. Nec blandit tincidunt nibh nisi, quam volutpat. In lacus
+laoreet
+diam risus. Mauris, risus faucibus sagittis sagittis tincidunt id justo. Diam massa pretium consequat mauris
+viverra. Sagittis eu libero
+
+> #### A wise girls her limit to touch sky. Repellat neque praesentium adipisci. This is an idea, this is as quickly.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec et ipsum ullamcorper venenatis fringilla.
+Pretium, purus eu nec vulputate vel habitant egestas. Congue ornare at ipsum, viverra. Vitae magna faucibus
+eros, lectus sociis. Etiam nunc amet id dignissim. Feugiat id tempor vel sit in ornare turpis posuere. Eu
+quisque integer non rhoncus elementum vel. Quis nec viverra lectus augue nec praesent volutpat tortor. Ipsum
+eget sed tempus luctus nisl. Ut etiam molestie mattis at faucibus mi at pellentesque. Pellentesque morbi
+nunc, curabitur arcu euismod suscipit. Duis mi sapien, donec non dictum
+
+Laoreet mauris odio ut nec. Nisl, sed adipiscing dignissim arcu placerat ornare pharetra nec
+in. Ultrices in nisl potenti vitae tempus. Auctor consectetur luctus eu in amet sagittis. Dis urna, vel
+hendrerit convallis cursus id.
+
+Senectus feugiat faucibus commodo egestas leo vitae in morbi. Enim arcu dignissim mauris, eu, eget pharetra
+odio amet pellentesque. Egestas nisi adipiscing sed in lectus. Vitae ultrices malesuada aliquet dignissim.
+Faucibus non tristique eu.
