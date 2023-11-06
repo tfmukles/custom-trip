@@ -1,0 +1,1 @@
+{"fileType":"md","fmType":"yaml","include":"*.md","exclude":"!*index.md, !_*index.mdx","name":"blog","template":[{"label":"data","name":"data","type":"object","fields":[{"label":"title","name":"title","type":"string"},{"label":"description","name":"description","type":"string"}]},{"label":"content","name":"content","type":"string"}]}
