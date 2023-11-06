@@ -1,5 +1,0 @@
-+++
-layout = "solar-system"
-+++
-
-# Jupiter

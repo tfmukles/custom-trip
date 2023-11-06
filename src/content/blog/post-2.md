@@ -1,6 +1,6 @@
 ---
-title = "TOML"
-description = "Front matter"
-categories = "front matter toml"
+ title: "Blog index"
+ description: "index description"
 ---
-This is content
+
+# Hello
