@@ -70,6 +70,9 @@ This is <u>HTML</u>
 
 ---
 
+
+# JavaScript
+
 ```javascript
 function $initHighlight(block, cls) {
   try {
