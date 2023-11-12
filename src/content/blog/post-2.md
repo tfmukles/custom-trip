@@ -8,11 +8,9 @@ categories: [JavaScript, React]
 ##  h2
 
 
-```md
-# h1 
-
-## h2
-
-### h3
+```js
+  function myFunction(){
+    return "John the don"
+  }
 ```
 
