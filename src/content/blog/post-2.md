@@ -4,6 +4,11 @@ date: 2020-04-30 12:34
 categories: [JavaScript, React]
 ---
 
+A*cat*meow
+I love supporting the **[EFF](https://eff.org)**.
+This is the *[Markdown Guide](https://www.markdownguide.org)*.
+See the section on [`code`](#code).
+
 # heading 1
 
 ## heading 2
@@ -29,6 +34,8 @@ aaaaaaaa**bold**_emphasis_~~delete~~`inline code`
 
 - [ ] not checked
 - [x] checked
+
+
 
 1. ordered list
 1. ordered list
@@ -63,7 +70,7 @@ This is ![image](https://github.githubassets.com/images/modules/logos_page/Octoc
 | aligned    |     aligned |   aligned    |
 
 <div style="color:red;">
-This is <u>HTML</u>
+  This is <u>HTML</u>
 </div>
 
 ---
