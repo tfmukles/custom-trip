@@ -4,73 +4,7 @@ date: 2020-04-30 12:34
 categories: [JavaScript, React]
 ---
 
-# heading 1
-
-## heading 2
-
-### heading 3
-
-#### heading 4
-
-##### heading 5
-
-###### heading 6
-
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-aaaaaaaa**bold**_emphasis_~~delete~~`inline code`
-
-- list
-
-  - list
-    - list
-  - list
-  - list
-
-- [ ] not checked
-- [x] checked
-
-1. ordered list
-1. ordered list
-1. ordered list
-   1. aaa
-   1. aaa
-      1. eeeee
-      1. eeeee
-   1. aaa
-1. ordered list
-
-This is [link to GitHub.com](https://github.com/).
-
-This is ![image](https://github.githubassets.com/images/modules/logos_page/Octocat.png).
-
-> quote
-> quote
-> quote
-> quote
-
-> quote
->
-> > quoted quote
-
-| Left align | Right align | Center align |
-| :--------- | ----------: | :----------: |
-| This       |        This |     This     |
-| column     |      column |    column    |
-| will       |        will |     will     |
-| be         |          be |      be      |
-| left       |       right |    center    |
-| aligned    |     aligned |   aligned    |
-
-<div style="color:red;">
-This is <u>HTML</u>
-</div>
-
----
-
----
-
-```javascript
+```jsx
 function $initHighlight(block, cls) {
   try {
     if (cls.search(/\bno\-highlight\b/) != -1)
@@ -91,5 +25,5 @@ function $initHighlight(block, cls) {
   )
 }
 
-export  $initHighlight;
+export default $initHighlight;
 ```
