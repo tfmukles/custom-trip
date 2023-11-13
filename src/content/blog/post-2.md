@@ -7,4 +7,3 @@ categories:
 ---
 
 A simple text.
-```
