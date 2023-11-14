@@ -4,13 +4,6 @@ date: 2020-04-30 12:34
 categories: [JavaScript, React]
 ---
 
-A*cat*meow
-I love supporting the **[EFF](https://eff.org)**.
-This is the *[Markdown Guide](https://www.markdownguide.org)*.
-See the section on [`code`](#code).
-
-<u>Underline</u>
-
 # heading 1
 
 ## heading 2
@@ -22,8 +15,6 @@ See the section on [`code`](#code).
 ##### heading 5
 
 ###### heading 6
-
-__Underlined Text__
 
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
@@ -38,8 +29,6 @@ aaaaaaaa**bold**_emphasis_~~delete~~`inline code`
 
 - [ ] not checked
 - [x] checked
-
-
 
 1. ordered list
 1. ordered list
@@ -73,7 +62,9 @@ This is ![image](https://github.githubassets.com/images/modules/logos_page/Octoc
 | left       |       right |    center    |
 | aligned    |     aligned |   aligned    |
 
-
+<div style="color:red;">
+This is <u>HTML</u>
+</div>
 
 ---
 
