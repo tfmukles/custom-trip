@@ -1,6 +1,8 @@
-+++
-  title = "This is frontmatter"
-  categories = ["a", "b"]
-+++
+---
+title: This is frontmatter
+categories:
+  - abc
+  - abc
+---
 
 You will like those projects!
