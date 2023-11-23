@@ -1,6 +1,5 @@
 +++
-  title = This is frontmatter
-  date = 2020-04-30 12:34
+  title = "This is frontmatter"
   categories = ["a", "b"]
 +++
 
