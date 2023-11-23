@@ -1,12 +1,1 @@
-{
-  "fileType": "md",
-  "fmType": "yaml",
-  "include": "",
-  "exclude": "",
-  "name": "blog",
-  "template": [
-    { "label": "title", "name": "title", "type": "string" },
-    { "label": "date", "name": "date", "type": "string" },
-    { "label": "categories", "name": "categories", "type": "Array" }
-  ]
-}
+{"fileType":"md","fmType":"toml","include":"","exclude":"","name":"blog","template":[{"label":"title","name":"title","type":"string"},{"label":"categories","name":"categories","type":"Array"}]}
