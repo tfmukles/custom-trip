@@ -1,13 +1,10 @@
----
-title: This is frontmatter
-date: 2020-04-30 12:34
-categories:
-  - JavaScript
-  - React
----
++++
+title= This is frontmatter
+date= 2020-04-30 12:34
+categories= ["a", "b"]
++++
 
 
----
 __Advertisement :)__
 
 - __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
