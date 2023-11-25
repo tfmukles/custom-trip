@@ -1,1 +1,19 @@
-{"fileType":"md","fmType":"toml","include":"","exclude":"","name":"blog","template":[{"label":"title","name":"title","type":"string"},{"label":"owner","name":"owner","type":"object","fields":[{"label":"name","name":"name","type":"string"},{"label":"dob","name":"dob","type":"Date"}]}]}
+{
+  "fileType": "md",
+  "fmType": "toml",
+  "include": "",
+  "exclude": "",
+  "name": "blog",
+  "template": [
+    { "label": "title", "name": "title", "type": "string" },
+    {
+      "label": "owner",
+      "name": "owner",
+      "type": "object",
+      "fields": [
+        { "label": "name", "name": "name", "type": "string" },
+        { "label": "dob", "name": "dob", "type": "Date" }
+      ]
+    }
+  ]
+}
