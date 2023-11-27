@@ -1,5 +1,0 @@
-{
-  "environment": "nextjs",
-  "media": { "root": "public/images", "public": "images" },
-  "content": { "root": "src/content" }
-}
