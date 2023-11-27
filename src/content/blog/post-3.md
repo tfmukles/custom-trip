@@ -1,5 +1,2 @@
----
-title: ''
-date: ''
-categories: []
----
++++
++++
