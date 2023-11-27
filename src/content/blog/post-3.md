@@ -1,5 +1,6 @@
----
-title: ''
-date: ''
-categories: []
----
++++
+  title = "title"
+  cat = ["a", "b", "c"]
++++
+
+page content
