@@ -6,7 +6,7 @@ list:
 meta_title: How are you boss
 description: Mokels Hossen
 date: 2023-11-13T00:00:00.000Z
-image: ''
+image: '/images/Muklessss_1.png'
 categories:
   - Mokles
 author: Mukles Hossen
