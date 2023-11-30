@@ -1,1 +1,0 @@
-{"fileType":"md","fmType":"toml","include":"","exclude":"","name":"blog","template":[{"label":"title","name":"title","type":"string"},{"label":"cat","name":"cat","type":"Array"}]}
