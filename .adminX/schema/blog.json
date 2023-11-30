@@ -1,1 +1,31 @@
-{"fileType":"md","fmType":"yaml","include":"","exclude":"","name":"blog","template":[{"label":"title","name":"title","type":"string"},{"label":"list","name":"list","type":"object","fields":[{"label":"list1","name":"list1","type":"object","fields":[{"label":"list2","name":"list2","type":"string"}]}]},{"label":"meta_title","name":"meta_title","type":"string"},{"label":"description","name":"description","type":"string"},{"label":"date","name":"date","type":"Date"},{"label":"image","name":"image","type":"string"},{"label":"categories","name":"categories","type":"Array"},{"label":"author","name":"author","type":"string"},{"label":"tags","name":"tags","type":"Array"},{"label":"draft","name":"draft","type":"boolean"}]}
+{
+  "fileType": "md",
+  "fmType": "yaml",
+  "include": "",
+  "exclude": "",
+  "name": "blog",
+  "template": [
+    { "label": "title", "name": "title", "type": "string" },
+    {
+      "label": "list",
+      "name": "list",
+      "type": "object",
+      "fields": [
+        {
+          "label": "list1",
+          "name": "list1",
+          "type": "object",
+          "fields": [{ "label": "list2", "name": "list2", "type": "string" }]
+        }
+      ]
+    },
+    { "label": "meta_title", "name": "meta_title", "type": "string" },
+    { "label": "description", "name": "description", "type": "string" },
+    { "label": "date", "name": "date", "type": "Date" },
+    { "label": "image", "name": "image", "type": "media" },
+    { "label": "categories", "name": "categories", "type": "Array" },
+    { "label": "author", "name": "author", "type": "string" },
+    { "label": "tags", "name": "tags", "type": "Array" },
+    { "label": "draft", "name": "draft", "type": "boolean" }
+  ]
+}
