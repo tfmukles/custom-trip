@@ -1,14 +1,14 @@
 ---
-title: Title
+title: Mokels
 list:
   list1:
-    list2: Mokles
-meta_title: Meta title expressionfd afasd
-description: description
+    list2: Mokles Hossen
+meta_title: Mokles Hossen
+description: Mokels Hossen
 date: 2023-11-13T00:00:00.000Z
 image: ''
 categories:
-  - New Value
+  - Mokles
 author: Mukles Hossen
 tags:
   - New Value
