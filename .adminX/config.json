@@ -1,1 +1,1 @@
-{"environment":"nextjs","content":{"root":"src/content"},"media":{"root":"public/images","public":"public"}}
+{"environment":"nextjs","media":{"root":"public/images","public":"public","themeConfig":"config/*"},"content":{"root":"src/content"}}
