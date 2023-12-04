@@ -1,1 +1,9 @@
-{"environment":"nextjs","media":{"root":"public/images","public":"public","themeConfig":"config/*"},"content":{"root":"src/content"}}
+{
+  "environment": "nextjs",
+  "media": {
+    "root": "public/images",
+    "public": "public",
+    "themeConfig": "config/*"
+  },
+  "content": { "root": "src/content" }
+}
