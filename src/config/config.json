@@ -2,7 +2,7 @@
   "site": {
     "title": "Nextplate",
     "base_url": "https://nextplate.netlify.app/",
-    "base_path": "/",
+    "base_path": "/MOkles",
     "trailing_slash": false,
     "favicon": "/images/favicon.png/1",
     "logo": "/images/logo.png/1",
