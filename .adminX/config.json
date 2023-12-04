@@ -2,8 +2,10 @@
   "environment": "nextjs",
   "media": {
     "root": "public/images",
-    "public": "public",
-    "themeConfig": "config/*"
+    "public": "public"
   },
-  "content": { "root": "src/content" }
+  "content": {
+    "root": "src/content"
+  },
+  "themeConfig": "src/config"
 }
