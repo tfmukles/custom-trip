@@ -1,9 +1,9 @@
 {
   "site": {
-    "title": "Nextplate 2.0",
+    "title": "Nextplate",
     "base_url": "https://nextplate.netlify.app/",
     "base_path": "/",
-    "trailing_slash": false,
+    "trailing_slash": true,
     "favicon": "/images/favicon.png/1",
     "logo": "/images/logo.png/1",
     "logo_darkmode": "/images/logo-darkmode-1.png",
@@ -12,9 +12,9 @@
     "logo_text": "Nextplate-2.0"
   },
   "settings": {
-    "search": false,
+    "search": true,
     "sticky_header": false,
-    "theme_switcher": false,
+    "theme_switcher": true,
     "default_theme": "system",
     "pagination": "3",
     "summary_length": 200,
