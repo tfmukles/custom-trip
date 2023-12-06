@@ -7,5 +7,5 @@
   "content": {
     "root": "src/content"
   },
-  "themeConfig": ["src/config/config.json"]
+  "themeConfig": ["src/config/config.json", "src/config/"]
 }
