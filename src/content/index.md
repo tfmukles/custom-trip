@@ -1,4 +1,3 @@
-
 ---
 title: "Hey I am Jhon"
 email: "mukles.themefisher@gmail.com"
