@@ -1,44 +1,51 @@
-[
-  {
-    "label": "title",
-    "name": "title",
-    "type": "string"
-  },
-  {
-    "label": "email",
-    "name": "email",
-    "type": "string"
-  },
-  {
-    "label": "image",
-    "name": "image",
-    "type": "media"
-  },
-  {
-    "label": "description",
-    "name": "description",
-    "type": "string"
-  },
-  {
-    "label": "social",
-    "name": "social",
-    "type": "Array",
-    "fields": [
-      {
-        "label": "name",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "label": "icon",
-        "name": "icon",
-        "type": "string"
-      },
-      {
-        "label": "link",
-        "name": "link",
-        "type": "string"
-      }
-    ]
-  }
-]
+{
+  "fileType": "md",
+  "fmType": "yaml",
+  "include": "",
+  "exclude": "",
+  "name": "content",
+  "template": [
+    {
+      "label": "title",
+      "name": "title",
+      "type": "string"
+    },
+    {
+      "label": "email",
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "label": "image",
+      "name": "image",
+      "type": "media"
+    },
+    {
+      "label": "description",
+      "name": "description",
+      "type": "string"
+    },
+    {
+      "label": "social",
+      "name": "social",
+      "type": "Array",
+      "fields": [
+        {
+          "label": "name",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "label": "icon",
+          "name": "icon",
+          "type": "string"
+        },
+        {
+          "label": "link",
+          "name": "link",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
