@@ -1,6 +1,6 @@
 {
-  "title": "Nextplate",
-  "base_url": "https://nextplate.netlify.app/",
+  "title": "NextPlate",
+  "base_url": "https://nextplate.netlify.app",
   "base_path": "/",
   "trailing_slash": true,
   "favicon": "images/call-to-action.png",
