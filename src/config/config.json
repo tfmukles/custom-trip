@@ -3,7 +3,7 @@
   "base_url": "https://nextplate.netlify.app/",
   "base_path": "/",
   "trailing_slash": true,
-  "favicon": "images/logo.png",
+  "favicon": "images/call-to-action.png",
   "logo": "/images/logo.png",
   "logo_darkmode": "images/avatar.png",
   "logo_width": "150",
