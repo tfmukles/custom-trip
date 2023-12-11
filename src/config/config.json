@@ -3,9 +3,9 @@
   "base_url": "https://nextplate.netlify.app/",
   "base_path": "/",
   "trailing_slash": true,
-  "favicon": "/public/images/no-search-found.png",
+  "favicon": "images/logo.png",
   "logo": "/images/logo.png",
-  "logo_darkmode": "/public/images/avatar-sm.png",
+  "logo_darkmode": "images/avatar.png",
   "logo_width": "150",
   "logo_height": "30",
   "logo_text": "Nextplate-2.0"
