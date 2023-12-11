@@ -1,12 +1,12 @@
 {
-    "title": "Nextplate",
-    "base_url": "https://nextplate.netlify.app/",
-    "base_path": "/",
-    "trailing_slash": true,
-    "favicon": "/images/favicon.png",
-    "logo": "/images/logo.png",
-    "logo_darkmode": "/images/logo-darkmode-1.png",
-    "logo_width": "150",
-    "logo_height": "30",
-    "logo_text": "Nextplate-2.0"
+  "title": "Nextplate",
+  "base_url": "https://nextplate.netlify.app/",
+  "base_path": "/",
+  "trailing_slash": true,
+  "favicon": "/images/favicon.png",
+  "logo": "/images/logo.png",
+  "logo_darkmode": "/public/images/avatar-sm.png",
+  "logo_width": "150",
+  "logo_height": "30",
+  "logo_text": "Nextplate-2.0"
 }
